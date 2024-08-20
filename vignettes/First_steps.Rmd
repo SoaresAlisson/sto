@@ -1,0 +1,129 @@
+---
+title: "First steps with Lazy Strings"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{First_steps}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+Lazy strings are some functions to make the life eaiser of those who deals withs strings and strings transformation.
+
+## Installing lazystrings
+
+Install using {devtools} package
+
+```{r eval=FALSE}
+install.packages("devtools") # if devtools is not installed yet
+devtools::install_github("SoaresAlisson/lzs")
+```
+
+Or install using {pak} package
+```{r, eval=FALSE}
+install.packages("pak", dependencies = TRUE) # if {pak} is not installed yet
+pak::pkg_install("SoaresAlisson/lzs")
+```
+
+
+## Loading packages
+
+The first thing to do is to load the packages, you can use the function to load many packages as easy as this, with the string to load libraries. So, instead of
+
+```{r library, eval=T}
+library(lzs)
+library(dplyr)
+library(ggplot2)
+library(stringr)
+```
+
+To load many packages with {LazyString} simply use `lzs::s2ll("package1 package2 package3 ...")`:
+
+```{r s2ll , eval=F}
+lzs::s2ll("lzs dplyr ggplot2 stringr")
+```
+
+
+## Generate a string using variables 
+
+Use `f()` and the variable inside curly brackets `{var}`
+
+```{r}
+var1 <- 912 * 2
+lorem <- "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+
+f("Bla bla: {var1}. Ble ble:
+  {lorem}")
+```
+
+The `f()` is just a wrapper around `glue::glue()` to use it even more easily.
+
+
+Another facility is to easily create vector from char text
+
+```{r s2v}
+"a b c d" |> s2v()
+s2v("Argentina China India Brazil Germany France")
+# the function strips the extra white spaces
+"a b c     d" |> s2v()
+# By default, it also remove commas
+"a, b, c, d" |> s2v()
+# by default, whitespaces and line breaks are understood as element separator
+"a b c\nd\te" |> s2v()
+# And specifying another character separator:
+"a,b,c,d" |> s2v(sep = ",")
+"a|b|c|d e" |> s2v(sep = "\\|")
+# If you need  whitespace in the element of the created vector, use underscore
+"bla foo_bar ble bli-blo" |> s2v()
+# If you need  whitespace in the element of the created vector, but do not want
+# to use underscore, so specify the wss parameter
+"bla foo_bar ble bli-blo" |> s2v(wss = "-")
+# To print the output as a string, so you can copy and paste the results in your code
+"a b c d" |> s2v(print = TRUE)
+```
+
+
+
+## grep2, grepl2, gsub2
+To easily use the native grep, grepl and gsub functions with the native R pipe, lazy strings have some alternatives, that actually are wrapper around this functions
+
+### grep2
+
+```{r grep2}
+c("a", "b", "c", "d") |> grep2("a")
+# instead of
+grep("a", c("a", "b", "c", "d"), value = T)
+# grep 2 is case insensitive by default
+c("a", "b", "c", "d") |> grep2("A")
+s2v("a b c d") |> grep2("A")
+# to disable ignore cases:
+c("a", "b", "c", "d", "A") |> grep2("A", ic = F)
+# to obtain indexes instead of values:
+c("a", "b", "c", "d") |> grep2("a", value = F)
+```
+
+### grepl2
+
+```{r grepl2}
+c("a", "b", "c", "d") |> grepl2("a")
+```
+
+### gsub2
+
+```{r}
+c("a", "b", "c", "d") |> gsub2("a", "x")
+# in the case of character
+"a b c d" |> gsub2("a", "x")
+# If no second argument is provided, than it will erase the provided pattern:
+"'bla bla1 'bla" |> gsub2("'")
+"'bla bla1 'bla" |> gsub2("bla1")
+```
+
+

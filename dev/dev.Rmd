@@ -1,0 +1,70 @@
+
+```{r}
+available::available("sto")
+```
+
+```{r}
+usethis::use_readme_rmd()
+```
+
+```{r}
+devtools::document()
+devtools::build()
+devtools::install()
+```
+
+ - adicionar pacote às dependências
+```{r}
+usethis::use_package("pacote")
+```
+
+```{r}
+# usethis::use_vignette("First_steps")
+# usethis::use_vignette("stopwords")
+# Create an article that only appears on the website with
+```
+
+```{r}
+# Criando página internet com references e articles
+pkgdown::build_site_github_pages()
+```
+```{r}
+extract_ppn <- function(string) {
+  string |>
+    stringr::str_extract_all(regex_NomeProprio) |>
+    lapply(trimws)
+}
+texto_teste <- "José da Silva e Fulano de Tal foram, bla Maria Silva. E depois disso, bla Joaquim José da Silva Xavier no STF"
+extract_ppn <- function(regex_ppn) {
+  texto_teste |>
+    stringr::str_extract_all(regex_ppn) |>
+    lapply(trimws)
+}
+
+"([A-ZÀ-ÿ][a-zà-ÿ\\-]+ (d[aeo]s? )?){1,}([A-ZÀ-ÿ][a-zà-ÿ\\-])*" |> extract_ppn()
+"((\\b[A-ZÀ-Ÿ][a-zà-ÿ\\-]+ (d[aeo]s? )?)+([A-ZÀ-Ÿ][a-zà-ÿ\\-]+)*)|(\\b[A-ZÀ-Ÿ\\.]{2,}\\b)" |> extract_ppn()
+"(\\b[A-ZÀ-ÿ][a-zà-ÿ\\-]+ (d[aeo]s? )?)+" |> extract_ppn()
+"([A-ZÀ-ÿ][a-zà-ÿ\\-]+ )*" |> extract_ppn()
+"\\b[[:Upper:]]([[:Lower:]]+|[:Lower:]*[[:Space:]]+[[:Lower:]+])*" |> extract_ppn()
+"([[:Upper:]][[:Lower:]]+)*" |> extract_ppn()
+
+
+regex_NomeProprio <- "([A-ZÀ-ÿ][a-zà-ÿ\\-]+ (d[aeo]s? )?){1,}([A-ZÀ-ÿ][a-zà-ÿ\\-])*"
+regex_NomeProprio <- "(\\b[A-ZÀ-ÿ][a-zà-ÿ\\-]+ (d[aeo]s? )?)+(\\b[A-ZÀ-ÿ][a-zà-ÿ\\-]\\b)*"
+regex_NomeProprio <- "(\\b[A-ZÀ-ÿ][a-zà-ÿ\\-]+ (d[aeo]s? )?)+"
+regex_NomeProprio <- "([A-ZÀ-ÿ][a-zà-ÿ\\-]+ )*"
+regex_NomeProprio <- "\\b[[:Upper:]]([[:Lower:]]+|[:Lower:]*[[:Space:]]+[[:Lower:]+])*"
+regex_NomeProprio <- "([[:Upper:]][[:Lower:]]+)*"
+
+extract_ppn("José da Silva e Fulano de Tal foram, bla Maria Silva.")
+```
+```{r}
+gen_stopwords(lang = "pt", categories = "V PP")
+```
+
+```{r comparando com quanteda}
+quanteda::stopwords("pt")[!quanteda::stopwords("pt") %in% sto::gen_stopwords("pt", "V DT prep CC PP PPZ preposition demonstrativo", vec = "vec")]
+```
+
+
+

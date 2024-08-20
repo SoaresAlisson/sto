@@ -1,0 +1,74 @@
+---
+title: "Generating stopwords"
+subtitle: "Generate a list of stopwords using grammar categories"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{stopwords}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+This functions is still under development
+At this time you can generate a stopwords list
+in Portuguese and English.
+
+There is many options of stopwords lists available in R, like: 
+- 
+But none is categorized allowing a more fine grained control of the words by grammar categories.
+
+```{r setup}
+library(sto)
+```
+
+Choose the language and which grammar tags use to generate a stopword list.
+The 
+`lang` parameter uses the two word designation, and the 
+`cat` designs the grammar category following Penn Treebank. See [here](https://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html)
+
+| POS Tag |	Description |	Example | Description |
+|-----|-----|-----|----|
+| CC  |coordinating conjunction|and||
+| CD  |cardinal number |	one, third ||
+| DT  |determiner |	the ||
+| EX  |existential | there 	there is ||
+| PP  | pronoum | me, you, he, she, it, we, they ||
+| PPZ | pronoum|||
+| UH  | interjection | oops! ||
+|  V  | verb | are be have |variations of verbs to be, have, |
+
+```{r gen_stopwords}
+gen_stopwords()
+gen_stopwords(lang = "en", categories = "CC")
+gen_stopwords(lang = "pt", categories = "CC DT")
+# to convert the list into a named vector
+gen_stopwords(lang = "en", categories = "CC DT V") |> unlist()
+
+gen_stopwords(lang = "pt")
+gen_stopwords(lang = "pt", categories = "V")
+```
+
+With the `vec` parameter, it is possible to have three different output formats: 
+list (default), vector and named vector.
+
+```{r genSW list vec}
+gen_stopwords(lang = "pt", categories = "V", vec = "list")
+gen_stopwords(lang = "pt", categories = "V", vec = "vec")
+gen_stopwords(lang = "pt", categories = "V", vec = "n_vec")
+```
+
+
+
+To use only certain kinds of verbs, like only the variations/conjugations of the verb `ser`:
+```{r verb$ser}
+gen_stopwords("pt", "V")$V$ser
+```
+
+
+
