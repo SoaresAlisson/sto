@@ -65,9 +65,12 @@ gen_stopwords(lang = "pt", categories = "V", vec = "n_vec")
 
 
 
-To use only certain kinds of verbs, like only the variations/conjugations of the verb `ser`:
+To use only certain kinds of verbs, like only the variations/conjugations of the Portuguese verb `ser`:
 ```{r verb$ser}
-gen_stopwords("pt", "V")$V$ser
+my_sw <- gen_stopwords("pt", "V", vec = "list")
+my_sw$V$ser
+# or shorter
+gen_stopwords("pt", "V", vec = "list")$V$seb
 ```
 
 

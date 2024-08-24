@@ -4,7 +4,9 @@ library(magrittr)
 
 # URL <- "https://economia.uol.com.br/noticias/redacao/2024/08/18/lula-diz-que-silvio-santos-tinha-medo-de-ser-preso-por-caso-panamericano.htm"
 # pagina <- rvest::read_html(URL)
-# text <- pagina |> rvest::html_nodes("p") |> rvest::html_text()
+# texto <- pagina |> rvest::html_nodes("p") |> rvest::html_text()
+# saveRDS(texto, "./dev/texto.rds")
+# texto <- readRDS("./dev/texto.rds")
 s2v <- function(char) {
   char |>
     strsplit(" ") |>

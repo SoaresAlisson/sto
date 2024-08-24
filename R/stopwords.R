@@ -4,6 +4,7 @@
 #' @param lang language, like "en", "pt"
 #' @param cat grammar categories, following penn bank
 #' #param vec as vector: "list", "n_vec" return a named vector, "vec" (pattern) return an unnamed vector.
+#' @param include include additional words to the stop words list
 #' @export
 #' @examples
 #' gen_stopwords()
@@ -12,7 +13,7 @@
 #' gen_stopwords(lang = "pt", categories = "V", vec = "list")
 #' gen_stopwords(lang = "pt", categories = "V", vec = "n_vec")
 #' gen_stopwords(lang = "pt", categories = "V", vec = "vec")
-gen_stopwords <- function(lang = "pt", categories = "IN CC CD", vec = "vec") {
+gen_stopwords <- function(lang = "pt", categories = "IN CC CD", vec = "vec", include = "") {
   # lang = "PT"
 
   # folder <- devtools::package_file("data/stopwords/")
@@ -23,6 +24,15 @@ gen_stopwords <- function(lang = "pt", categories = "IN CC CD", vec = "vec") {
   # file_searched <- devtools::package_file(paste0( "/data/stopwords/", file_name))
   # file_searched <- devtools::package_file(paste0("/data/stopwords/", file_name))
   yaml_file_path <- system.file("stopwords", file_name, package = "sto")
+
+  if (!yaml_file_path |> file.exists()) {
+    paste0(
+      'Error in "', lang,
+      '": language not found. Please specify a valid language'
+    ) |>
+      stop()
+  }
+
   # system.file( package = "sto")
   # # reading the yml filei
   list_sw <- yaml_file_path |>
@@ -30,17 +40,23 @@ gen_stopwords <- function(lang = "pt", categories = "IN CC CD", vec = "vec") {
     ls2v()
   # lapply(lapply(s2v)
   # list_sw[7] |> lapply(s2v)
-  #
+
+  list_sw[["included"]] <- s2v(include) #|> stringr::str_to_title()
+
   categ_vec <- categories |>
     toupper() |>
     s2v()
+
+  categ_vec <- c(categ_vec, "included")
 
   sw <- list_sw[categ_vec]
 
   if (vec == "n_vec") {
     sw <- unlist(sw)
   } else if (vec == "vec") {
-    sw <- unlist(sw) |> unname()
+    sw <- unlist(sw) |>
+      unname() |>
+      unique()
   }
 
   return(sw)

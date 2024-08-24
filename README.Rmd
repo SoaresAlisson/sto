@@ -13,16 +13,32 @@ knitr::opts_chunk$set(
 )
 ```
 
-# sto
+# String Operations - sto
 
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of sto is to ...
+The goal of {sto} is to make some operations with strings and text analysis easier.
+One of the functions make it easier to create vectors from string and other operations with `grep`, `grepl` and `gsub` in native pipe.
+sto also have functions to fine grain generate stopwords lists by language and grammar categories.
+Also comes with a rule based proper name/entity extractor in the form of list or graph.
 
-## Installation
+Keywords: strings; text analysis; text mining
 
-You can install the development version of sto like so:
+## Installing String Operations
+
+Install using {devtools} package
+
+```{r eval=FALSE}
+install.packages("devtools") # if devtools is not installed yet
+devtools::install_github("SoaresAlisson/sto")
+```
+
+Or install using {pak} package
+```{r, eval=FALSE}
+install.packages("pak", dependencies = TRUE) # if {pak} is not installed yet
+pak::pkg_install("SoaresAlisson/sto")
+```
 
 ``` r
 # FILL THIS IN! HOW CAN PEOPLE INSTALL YOUR DEV PACKAGE?
@@ -30,25 +46,4 @@ You can install the development version of sto like so:
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
-
-```{r example}
-library(sto)
-## basic example code
-```
-
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
-
-```{r cars}
-summary(cars)
-```
-
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this.
-
-You can also embed plots, for example:
-
-```{r pressure, echo = FALSE}
-plot(pressure)
-```
-
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.
+See the vignettes.

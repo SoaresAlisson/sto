@@ -1,5 +1,5 @@
 ---
-title: "First steps with Lazy Strings"
+title: "First steps with String Operations {sto} package"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{First_steps}
@@ -15,21 +15,21 @@ knitr::opts_chunk$set(
 ```
 
 
-Lazy strings are some functions to make the life eaiser of those who deals withs strings and strings transformation.
+{String Operations} has some functions to make the life easier of those who deals with strings and strings transformation.
 
-## Installing lazystrings
+## Installing String Operations
 
 Install using {devtools} package
 
 ```{r eval=FALSE}
 install.packages("devtools") # if devtools is not installed yet
-devtools::install_github("SoaresAlisson/lzs")
+devtools::install_github("SoaresAlisson/sto")
 ```
 
 Or install using {pak} package
 ```{r, eval=FALSE}
 install.packages("pak", dependencies = TRUE) # if {pak} is not installed yet
-pak::pkg_install("SoaresAlisson/lzs")
+pak::pkg_install("SoaresAlisson/sto")
 ```
 
 
@@ -38,16 +38,16 @@ pak::pkg_install("SoaresAlisson/lzs")
 The first thing to do is to load the packages, you can use the function to load many packages as easy as this, with the string to load libraries. So, instead of
 
 ```{r library, eval=T}
-library(lzs)
+library(sto)
 library(dplyr)
 library(ggplot2)
 library(stringr)
 ```
 
-To load many packages with {LazyString} simply use `lzs::s2ll("package1 package2 package3 ...")`:
+To load many packages with {string operations} simply use `sto::ll("package1 package2 package3 ...")`:
 
 ```{r s2ll , eval=F}
-lzs::s2ll("lzs dplyr ggplot2 stringr")
+sto::ll("sto dplyr ggplot2 stringr tidyr")
 ```
 
 

@@ -1,5 +1,9 @@
 rgx_abbrev <- "([:upper:]\\.){2,}"
-rgx_word <- "(\\b[A-ZÀ-Ÿ][[A-ZÀ-Ÿ][a-zà-ÿ]\\.\\-]+\\b)"
+# rgx_word <- "(\\b[A-ZÀ-Ÿ][[A-ZÀ-Ÿ][a-zà-ÿ]\\.\\-]+\\b)"
+# rgx_word <- "(\\b[A-ZÀ-Ÿ][A-ZÀ-Ÿa-zà-ÿ0-9\\.\\-]+\\b)"
+# unicode in order https://symbl.cc/en/unicode-table/#spacing-modifier-letters
+rgx_word <- "(\\b[A-ZÀ-ß][A-ZÀ-ßa-zà-ÿ0-9\\.\\-]+\\b)"
+
 
 
 #' A lowercase connectors between two proper names
@@ -12,14 +16,15 @@ rgx_word <- "(\\b[A-ZÀ-Ÿ][[A-ZÀ-Ÿ][a-zà-ÿ]\\.\\-]+\\b)"
 #'
 #' connectors("es")
 #' connectors("pt")
+#' connectors("port")
 #' connectors("en")
 #' connectors("misc")
 connectors <- function(lang = "pt") {
-  if (lang == "pt") {
+  if (lang %in% s2v("pt por port portugues português portuguese")) {
     conn <- "da das de do dos"
-  } else if (lang == "es") {
+  } else if (lang %in% s2v("es spa spanish espanol español")) {
     conn <- "del"
-  } else if (lang == "en") {
+  } else if (lang %in% s2v("en eng english")) {
     conn <- "of of_the"
   } else if (lang == "misc") {
     conn <- "of the of_the von van del"
@@ -27,10 +32,7 @@ connectors <- function(lang = "pt") {
     paste("Lang not found:", lang) |> stop()
   }
 
-  con_v <- conn |> s2v()
-
-  paste(con_v, collapse = "|") |>
-    gsub2("(.*)", "(\\1)")
+  conn |> s2v()
 }
 
 #' A rule based entity extractor
@@ -41,18 +43,24 @@ connectors <- function(lang = "pt") {
 #' @param sw a vector of stopwords
 #' @export
 #' @examples
-#' "John Does lives in New York in United States of America" |> extract_entity()
-#' "João Ninguém mora em São José do Rio Preto" |> extract_entity(connector = connectors("pt"))
+#' "John Does lives in New York in United States of America." |> extract_entity()
+#' "João Ninguém mora em São José do Rio Preto. Ele esteve antes em Sergipe" |> extract_entity(connector = connectors("pt"))
 # text |> extract_entity()
-extract_entity <- function(text, connector = connectors("misc"), sw = "the") {
-  rgx_ppn <- paste0("(", rgx_word, "+ ?)+", "", connector, "? (", rgx_word, " ?)*")
+extract_entity <- function(text, connectors = connectors("misc"), sw = "the") {
+  connectors <- connectors |> s2v()
+  connectors <- paste(connectors, collapse = "|") |>
+    gsub2("(.*)", "(\\1)")
+
+  # rgx_ppn <- paste0("(", rgx_word, "+ ?)+", "", connector, "? (", rgx_word, " ?)*")
+  rgx_ppn <- paste0("(", rgx_word, "+ ?)+", "(", connector, "? (", rgx_word, " ?)+)*")
 
   # text <- texto
   text_vec <- text |>
     stringr::str_extract_all(rgx_ppn) |>
     unlist() |>
-    unique() |>
-    trimws()
+    # unique() |>
+    stringr::str_trim()
+  # trimws()
   # deleting stopword elements
   text_vec[!text_vec %in% stringr::str_to_title(sw)]
 }
@@ -67,21 +75,25 @@ extract_entity <- function(text, connector = connectors("misc"), sw = "the") {
 extract_relation <- function(text, using = "sentences",
                              connectors = connectors("misc"),
                              sw = gen_stopwords("en")) {
-  message("iniciando")
   if (using == "sentences" || using == "sent") {
-    message("Using sentences")
+    message("Tokenizing by sentences")
     list_w <- text |>
       tokenizers::tokenize_sentences()
   } else if (using == "paragraph" || using == "par") {
-    message("Using paragraph")
+    message("Tokenizing by paragraph")
     list_w <- text |>
       tokenizers::tokenize_paragraphs()
   } else {
-    stop("Parameter invalid")
+    stop(paste("Parameter invalid: ", using))
   }
 
-  list_w <- list_w |>
-    lapply(extract_entity, using, connectors, sw)
+  list_w <- lapply(
+    X = list_w, \(txt) {
+      extract_entity(txt,
+        connector = connectors, sw = sw
+      )
+    }
+  )
 
   list_length <- list_w |>
     lapply(length) |>
@@ -91,18 +103,20 @@ extract_relation <- function(text, using = "sentences",
   list_w[list_length > 1] #|> lapply(combn, 2, simplify = TRUE)
 }
 
-#' Extract a non directional graph based on co-occurrence in sentence or paragraph.
-#' It extracts only if two entities are mentioned in the same sentence or paragraph
+#' Extract a non directional graph based on co-occurrence in the token.
+#' It extracts only if two entities are mentioned in the same token (sentence or paragraph)
 #' @param text an input text
 #' @param using sentence or paragraph to tokenize
 #' @param connectors lowercase connectors, like the "von" in "John von Neumann".
-#' @param sw stopwords
+#' @param sw stopwords vector.
 #' @export
 #' @examples
 #' "John Does lives in New York in United States of America" |> extract_relation()
 # extract_graph(text)
-extract_graph <- function(text, using = "sentences", connectors = connectors("misc"), sw = "") {
-  list_ent <- text |> extract_relation(using, using, connectors, sw)
+extract_graph <- function(text, using = "sentences",
+                          connectors = connectors("misc"),
+                          sw = gen_stopwords("en")) {
+  list_ent <- text |> extract_relation(using, connectors, sw)
   graph <- tibble::tibble(n1 = as.character(""), n2 = as.character(""))
   # list_length <- list_ent |> length()
   lapply(list_ent, \(e) {
