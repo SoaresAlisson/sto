@@ -17,6 +17,7 @@ This function returns a regex pattern by language with lowercase allowed connect
 
 connectors("es")
 connectors("pt")
+connectors("port")
 connectors("en")
 connectors("misc")
 }

@@ -53,7 +53,7 @@ Or it is possible to use other languages, specifying the parameter `connectors` 
 
 ```{r NER pt}
 "João Ninguém mora em São José do Rio Preto. Ele esteve antes em Sergipe" |>
-  extract_entity(connector = connectors("pt"))
+  extract_entity(connect = connectors("pt"))
 # To check the connectors:
 connectors("pt")
 # by default, the functions uses the parameter "misc" meaning "miscellaneous".

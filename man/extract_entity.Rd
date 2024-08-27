@@ -6,7 +6,7 @@
 extracts the entity from a text using regex. This regex captures all uppercase words, words that begin with upper case. If there is sequence of this patterns together, this function also captures.
 In the case of proper names with common lower case connectors like "Wwwww of Wwwww" this function also captures the connector and the subsequent uppercase words.}
 \usage{
-extract_entity(text, connector = connectors("misc"), sw = "the")
+extract_entity(text, connect = connectors("misc"), sw = "the")
 }
 \arguments{
 \item{text}{an input text}
@@ -22,5 +22,5 @@ In the case of proper names with common lower case connectors like "Wwwww of Www
 }
 \examples{
 "John Does lives in New York in United States of America." |> extract_entity()
-"João Ninguém mora em São José do Rio Preto. Ele esteve antes em Sergipe" |> extract_entity(connector = connectors("pt"))
+"João Ninguém mora em São José do Rio Preto. Ele esteve antes em Sergipe" |> extract_entity(connect = connectors("pt"))
 }

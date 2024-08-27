@@ -44,12 +44,11 @@ connectors <- function(lang = "pt") {
 #' @export
 #' @examples
 #' "John Does lives in New York in United States of America." |> extract_entity()
-#' "João Ninguém mora em São José do Rio Preto. Ele esteve antes em Sergipe" |> extract_entity(connector = connectors("pt"))
+#' "João Ninguém mora em São José do Rio Preto. Ele esteve antes em Sergipe" |> extract_entity(connect = connectors("pt"))
 # text |> extract_entity()
-extract_entity <- function(text, connectors = connectors("misc"), sw = "the") {
-  connectors <- connectors |> s2v()
-  connectors <- paste(connectors, collapse = "|") |>
-    gsub2("(.*)", "(\\1)")
+extract_entity <- function(text, connect = connectors("misc"), sw = "the") {
+  # connectors <- connectors |> s2v()
+  connector <- paste(connect, collapse = "|") |> gsub2("(.*)", "(\\1)")
 
   # rgx_ppn <- paste0("(", rgx_word, "+ ?)+", "", connector, "? (", rgx_word, " ?)*")
   rgx_ppn <- paste0("(", rgx_word, "+ ?)+", "(", connector, "? (", rgx_word, " ?)+)*")

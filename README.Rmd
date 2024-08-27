@@ -18,15 +18,15 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of {sto} is to make some operations with strings and text analysis easier.
-One of the functions make it easier to create vectors from string and other operations with `grep`, `grepl` and `gsub` in native pipe.
-sto also have functions to fine grain generate stopwords lists by language and grammar categories.
-Also comes with a rule based proper name/entity extractor in the form of list or graph.
+The goal of {sto} is to make easier some of the tedious operations involving strings and text analysis.
+It comes with three main types of functions:
+1) You can use it to quickly create vectors from strings, load a series os packages more easily, and perform other operations like `grep`, `grepl` and `gsub` with native pipe.
+2) {sto} also provides functions for fine grain generate stopword lists by language and grammar categories. Most of the existing stopwords packages only provides a vector of words.
+3) Additionally, {sto} comes with a rule-based proper name/entity extractor that returns vectors, lists, or graphs representing binary co-occurrence in sentences or paragraphs.
 
-Keywords: strings; text analysis; text mining
+**Keywords**: strings; text analysis; text mining
 
 ## Installing String Operations
-
 Install using {devtools} package
 
 ```{r eval=FALSE}

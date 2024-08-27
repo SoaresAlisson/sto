@@ -24,7 +24,12 @@ usethis::use_package("pacote")
 # Create an article that only appears on the website with
 ```
 
-```{r}
+```{r usethis::use_github}
+devtools::build_readme()
+usethis::use_github()
+```
+
+```{r build_site_github_pages}
 # Criando página internet com references e articles
 pkgdown::build_site_github_pages()
 ```
