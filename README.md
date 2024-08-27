@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# String Operations - sto
+# String Operations - {sto}
 
 <!-- badges: start -->
 <!-- badges: end -->
@@ -41,4 +41,5 @@ pak::pkg_install("SoaresAlisson/sto")
 
 ## Example
 
-See the vignettes.
+See the vignettes in the
+[webpage](https://soaresalisson.github.io/sto/index.html)
