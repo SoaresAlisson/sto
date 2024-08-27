@@ -14,7 +14,7 @@ devtools::install()
 ```
 
  - adicionar pacote às dependências
-```{r}
+`https://soaresalisson.github.io/sto/index.html``{r}
 usethis::use_package("pacote")
 ```
 

@@ -36,13 +36,19 @@ Function to generate a list of stopwords for a given language using grammar cate
       <a href="../articles/entities_and_relation_extraction.html">entities_and_relation_extraction</a>
     </li>
     <li>
-      <a href="../articles/First_steps.html">First steps with Lazy Strings</a>
+      <a href="../articles/First_steps.html">First steps with String Operations {sto} package</a>
     </li>
     <li>
       <a href="../articles/stopwords.html">Generating stopwords</a>
     </li>
   </ul></li>
-      </ul><ul class="nav navbar-nav navbar-right"></ul></div><!--/.nav-collapse -->
+      </ul><ul class="nav navbar-nav navbar-right"><li>
+  <a href="https://github.com/SoaresAlisson/sto/" class="external-link">
+    <span class="fab fa-github fa-lg"></span>
+
+  </a>
+</li>
+      </ul></div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
 
@@ -52,7 +58,7 @@ Function to generate a list of stopwords for a given language using grammar cate
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Generates a stopwords list of terms Function to generate a list of stopwords for a given language using grammar categories.</h1>
-
+    <small class="dont-index">Source: <a href="https://github.com/SoaresAlisson/sto/blob/HEAD/R/stopwords.R" class="external-link"><code>R/stopwords.R</code></a></small>
     <div class="hidden name"><code>gen_stopwords.Rd</code></div>
     </div>
 
@@ -111,30 +117,28 @@ Function to generate a list of stopwords for a given language using grammar cate
 <span class="r-out co"><span class="r-pr">#&gt;</span> [41] "milésimo"         "milionésimo"      "bilionésimo"     </span>
 <span class="r-in"><span><span class="fu">gen_stopwords</span><span class="op">(</span>lang <span class="op">=</span> <span class="st">"pt"</span>, categories <span class="op">=</span> <span class="st">"V"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [1] "ser"        "sou"        "sois"       "é"          "és"        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [6] "somos"      "sois"       "são"        "era"        "eram"      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [11] "éramos"     "serei"      "será"       "serão"      "serás"     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [16] "fui"        "foste"      "foi"        "fomos"      "fostes"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [21] "foram"      "era"        "eras"       "era"        "éramos"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [26] "éreis"      "eram"       "serei"      "serás"      "será"      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [31] "seremos"    "sereis"     "serão"      "seja"       "sejam"     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [36] "estar"      "estou"      "estás"      "está"       "estamos"   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [41] "estais"     "estão"      "estive"     "estiveste"  "esteve"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [46] "estivemos"  "estivestes" "estiveram"  "estava"     "estavas"   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [51] "estava"     "estávamos"  "estáveis"   "estavam"    "estarei"   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [56] "estarás"    "estará"     "estaremos"  "estareis"   "estarão"   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [61] "esteja"     "estejam"    "ter"        "tenham"     "têem"      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [66] "tenho"      "tens"       "tem"        "temos"      "tendes"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [71] "têm"        "tive"       "tiveste"    "teve"       "tivemos"   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [76] "tivestes"   "tiveram"    "tinha"      "tinhas"     "tinha"     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [81] "tínhamos"   "tínheis"    "tinham"     "terei"      "terás"     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [86] "terá"       "teremos"    "tereis"     "terão"      "teria"     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [91] "teriam"     "haver"      "houve"      "haveria"    "haveriam"  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [96] "hei"        "hás"        "há"         "havemos"    "haveis"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [101] "hão"        "houver"     "houveres"   "houver"     "houvermos" </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [106] "houverdes"  "houverem"   "havia"      "havias"     "havia"     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [111] "havíamos"   "havíeis"    "haviam"     "haverei"    "haverás"   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [116] "haverá"     "haveremos"  "havereis"   "haverão"    "haja"      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [121] "hajam"      "houvera"    "houveram"   "houvesse"  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [6] "somos"      "são"        "era"        "eram"       "éramos"    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [11] "serei"      "será"       "serão"      "serás"      "fui"       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [16] "foste"      "foi"        "fomos"      "fostes"     "foram"     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [21] "eras"       "éreis"      "seremos"    "sereis"     "seja"      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [26] "sejam"      "estar"      "estou"      "estás"      "está"      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [31] "estamos"    "estais"     "estão"      "estive"     "estiveste" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [36] "esteve"     "estivemos"  "estivestes" "estiveram"  "estava"    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [41] "estavas"    "estávamos"  "estáveis"   "estavam"    "estarei"   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [46] "estarás"    "estará"     "estaremos"  "estareis"   "estarão"   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [51] "esteja"     "estejam"    "ter"        "tenham"     "têem"      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [56] "tenho"      "tens"       "tem"        "temos"      "tendes"    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [61] "têm"        "tive"       "tiveste"    "teve"       "tivemos"   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [66] "tivestes"   "tiveram"    "tinha"      "tinhas"     "tínhamos"  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [71] "tínheis"    "tinham"     "terei"      "terás"      "terá"      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [76] "teremos"    "tereis"     "terão"      "teria"      "teriam"    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [81] "haver"      "houve"      "haveria"    "haveriam"   "hei"       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [86] "hás"        "há"         "havemos"    "haveis"     "hão"       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [91] "houver"     "houveres"   "houvermos"  "houverdes"  "houverem"  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [96] "havia"      "havias"     "havíamos"   "havíeis"    "haviam"    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [101] "haverei"    "haverás"    "haverá"     "haveremos"  "havereis"  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [106] "haverão"    "haja"       "hajam"      "houvera"    "houveram"  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [111] "houvesse"  </span>
 <span class="r-in"><span><span class="fu">gen_stopwords</span><span class="op">(</span>lang <span class="op">=</span> <span class="st">"pt"</span>, categories <span class="op">=</span> <span class="st">"V"</span>, vec <span class="op">=</span> <span class="st">"list"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $V</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $V$ser</span>
@@ -216,30 +220,28 @@ Function to generate a list of stopwords for a given language using grammar cate
 <span class="r-out co"><span class="r-pr">#&gt;</span>      "hajam"    "houvera"   "houveram"   "houvesse" </span>
 <span class="r-in"><span><span class="fu">gen_stopwords</span><span class="op">(</span>lang <span class="op">=</span> <span class="st">"pt"</span>, categories <span class="op">=</span> <span class="st">"V"</span>, vec <span class="op">=</span> <span class="st">"vec"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [1] "ser"        "sou"        "sois"       "é"          "és"        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [6] "somos"      "sois"       "são"        "era"        "eram"      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [11] "éramos"     "serei"      "será"       "serão"      "serás"     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [16] "fui"        "foste"      "foi"        "fomos"      "fostes"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [21] "foram"      "era"        "eras"       "era"        "éramos"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [26] "éreis"      "eram"       "serei"      "serás"      "será"      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [31] "seremos"    "sereis"     "serão"      "seja"       "sejam"     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [36] "estar"      "estou"      "estás"      "está"       "estamos"   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [41] "estais"     "estão"      "estive"     "estiveste"  "esteve"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [46] "estivemos"  "estivestes" "estiveram"  "estava"     "estavas"   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [51] "estava"     "estávamos"  "estáveis"   "estavam"    "estarei"   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [56] "estarás"    "estará"     "estaremos"  "estareis"   "estarão"   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [61] "esteja"     "estejam"    "ter"        "tenham"     "têem"      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [66] "tenho"      "tens"       "tem"        "temos"      "tendes"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [71] "têm"        "tive"       "tiveste"    "teve"       "tivemos"   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [76] "tivestes"   "tiveram"    "tinha"      "tinhas"     "tinha"     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [81] "tínhamos"   "tínheis"    "tinham"     "terei"      "terás"     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [86] "terá"       "teremos"    "tereis"     "terão"      "teria"     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [91] "teriam"     "haver"      "houve"      "haveria"    "haveriam"  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [96] "hei"        "hás"        "há"         "havemos"    "haveis"    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [101] "hão"        "houver"     "houveres"   "houver"     "houvermos" </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [106] "houverdes"  "houverem"   "havia"      "havias"     "havia"     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [111] "havíamos"   "havíeis"    "haviam"     "haverei"    "haverás"   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [116] "haverá"     "haveremos"  "havereis"   "haverão"    "haja"      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [121] "hajam"      "houvera"    "houveram"   "houvesse"  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [6] "somos"      "são"        "era"        "eram"       "éramos"    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [11] "serei"      "será"       "serão"      "serás"      "fui"       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [16] "foste"      "foi"        "fomos"      "fostes"     "foram"     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [21] "eras"       "éreis"      "seremos"    "sereis"     "seja"      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [26] "sejam"      "estar"      "estou"      "estás"      "está"      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [31] "estamos"    "estais"     "estão"      "estive"     "estiveste" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [36] "esteve"     "estivemos"  "estivestes" "estiveram"  "estava"    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [41] "estavas"    "estávamos"  "estáveis"   "estavam"    "estarei"   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [46] "estarás"    "estará"     "estaremos"  "estareis"   "estarão"   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [51] "esteja"     "estejam"    "ter"        "tenham"     "têem"      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [56] "tenho"      "tens"       "tem"        "temos"      "tendes"    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [61] "têm"        "tive"       "tiveste"    "teve"       "tivemos"   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [66] "tivestes"   "tiveram"    "tinha"      "tinhas"     "tínhamos"  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [71] "tínheis"    "tinham"     "terei"      "terás"      "terá"      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [76] "teremos"    "tereis"     "terão"      "teria"      "teriam"    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [81] "haver"      "houve"      "haveria"    "haveriam"   "hei"       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [86] "hás"        "há"         "havemos"    "haveis"     "hão"       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [91] "houver"     "houveres"   "houvermos"  "houverdes"  "houverem"  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [96] "havia"      "havias"     "havíamos"   "havíeis"    "haviam"    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [101] "haverei"    "haverás"    "haverá"     "haveremos"  "havereis"  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [106] "haverão"    "haja"       "hajam"      "houvera"    "houveram"  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [111] "houvesse"  </span>
 </code></pre></div>
     </div>
   </div>

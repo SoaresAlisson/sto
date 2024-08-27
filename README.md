@@ -35,11 +35,7 @@ install.packages("pak", dependencies = TRUE) # if {pak} is not installed yet
 pak::pkg_install("SoaresAlisson/sto")
 ```
 
-``` r
-# FILL THIS IN! HOW CAN PEOPLE INSTALL YOUR DEV PACKAGE?
-```
-
 ## Example
 
 See the vignettes in the
-[webpage](https://soaresalisson.github.io/sto/index.html)
+[articles](https://soaresalisson.github.io/sto/index.html)

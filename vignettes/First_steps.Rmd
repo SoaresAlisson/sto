@@ -37,7 +37,7 @@ pak::pkg_install("SoaresAlisson/sto")
 
 The first thing to do is to load the packages, you can use the function to load many packages as easy as this, with the string to load libraries. So, instead of
 
-```{r library, eval=T}
+```{r library, eval=F}
 library(sto)
 library(dplyr)
 library(ggplot2)

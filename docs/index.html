@@ -53,7 +53,7 @@
       <a href="articles/entities_and_relation_extraction.html">entities_and_relation_extraction</a>
     </li>
     <li>
-      <a href="articles/First_steps.html">First steps with Lazy Strings</a>
+      <a href="articles/First_steps.html">First steps with String Operations {sto} package</a>
     </li>
     <li>
       <a href="articles/stopwords.html">Generating stopwords</a>
@@ -61,7 +61,14 @@
   </ul>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right"></ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+  <a href="https://github.com/SoaresAlisson/sto/" class="external-link">
+    <span class="fab fa-github fa-lg"></span>
+
+  </a>
+</li>
+      </ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -73,11 +80,43 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-some facilities for string manipulation. from easily loading libraries from a char object, to easily pipe grep, grepl and gsub with native R pipe, easily transforming char into vector.
+<div class="section level1">
+<div class="page-header"><h1 id="string-operations---sto">String Operations - {sto}<a class="anchor" aria-label="anchor" href="#string-operations---sto"></a>
+</h1></div>
+<!-- badges: start -->
+<!-- badges: end -->
+<p>The goal of {sto} is to make easier some of the tedious operations involving strings and text analysis. It comes with three main types of functions: 1) You can use it to quickly create vectors from strings, load a series os packages more easily, and perform other operations like <code>grep</code>, <code>grepl</code> and <code>gsub</code> with native pipe. 2) {sto} also provides functions for fine grain generate stopword lists by language and grammar categories. Most of the existing stopwords packages only provides a vector of words. 3) Additionally, {sto} comes with a rule-based proper name/entity extractor that returns vectors, lists, or graphs representing binary co-occurrence in sentences or paragraphs.</p>
+<p><strong>Keywords</strong>: strings; text analysis; text mining</p>
+<div class="section level2">
+<h2 id="installing-string-operations">Installing String Operations<a class="anchor" aria-label="anchor" href="#installing-string-operations"></a>
+</h2>
+<p>Install using {devtools} package</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span> <span class="co"># if devtools is not installed yet</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"SoaresAlisson/sto"</span><span class="op">)</span></span></code></pre></div>
+<p>Or install using {pak} package</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"pak"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="co"># if {pak} is not installed yet</span></span>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pkg_install.html" class="external-link">pkg_install</a></span><span class="op">(</span><span class="st">"SoaresAlisson/sto"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
+</h2>
+<p>See the vignettes in the <a href="https://soaresalisson.github.io/sto/index.html" class="external-link">articles</a></p>
+</div>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <div class="license">
+    <div class="links">
+<h2 data-toc-skip>Links</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/SoaresAlisson/sto/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/SoaresAlisson/sto/issues" class="external-link">Report a bug</a></li>
+</ul>
+</div>
+
+<div class="license">
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li>What license is it under?</li>
