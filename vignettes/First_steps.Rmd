@@ -50,6 +50,9 @@ To load many packages with {string operations} simply use `sto::ll("package1 pac
 sto::ll("sto dplyr ggplot2 stringr tidyr")
 ```
 
+```{r s2ll echoTrue, eval=TRUE, echo=FALSE}
+sto::ll("sto dplyr")
+```
 
 ## Generate a string using variables 
 
