@@ -121,14 +121,28 @@ ls2v <- function(char, sep = " |\\n|\\t|\\r", wss = "_") {
 
 #' load libraries from string
 #' load packages from a char separated by space or commas
+#' @param char character with package names
+#' @param print if TRUE, will return a string that can be pasted in the console
+#' @param ... additional parameters
 #' @export
 #' @examples
 #' sto::ll("rvest stringr dplyr")
-ll <- function(char, ...) {
+#' sto::ll("rvest stringr dplyr", print=TRUE)
+ll <- function(char, print=FALSE, ...) {
+  # char <- "rvest stringr dplyr"
+if (print == FALSE) {
   gsub(",|;", " ", char) |>
     s2v() |>
     stringi::stri_remove_empty() |>
     lapply(library, character.only = TRUE, ...)
+  } else if (print == TRUE){
+  packages <- gsub(",|;", " ", char) |>
+    s2v() |>
+    stringi::stri_remove_empty()
+sapply(packages, \(lib) f("library({lib})"))  |>
+      paste(collapse = "\n") |>
+      cat()
+  } 
 }
 
 #' install libraries from string

@@ -1,5 +1,5 @@
 ---
-title: "entities_and_relation_extraction"
+title: "Entities and relation extraction"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{entities_and_relation_extraction}
@@ -49,18 +49,24 @@ The downsides are
 "John Does lives in New York in United States of America." |> extract_entity()
 ```
 
-Or it is possible to use other languages, specifying the parameter `connectors` using the function `connectors(lang)`.
+Or it is possible to use other languages, specifying the parameter `connectors` using the function `connectors(lang)`. Checking the connectors:
+
+```{r}
+connectors("eng")
+connectors("pt")
+connectors("port")
+
+# by default, the functions uses the parameter "misc" meaning "miscellaneous".
+connectors("misc")
+```
+
 
 ```{r NER pt}
 "João Ninguém mora em São José do Rio Preto. Ele esteve antes em Sergipe" |>
   extract_entity(connect = connectors("pt"))
-# To check the connectors:
-connectors("pt")
-# by default, the functions uses the parameter "misc" meaning "miscellaneous".
-connectors("misc")
 
-"John von Neumann (/vɒn ˈnɔɪmən/ von NOY-mən; Hungarian: Neumann János Lajos [ˈnɒjmɒn ˈjaːnoʃ ˈlɒjoʃ]; December 28, 1903 – February 8, 1957) was a Hungarian and American mathematician, physicist, computer scientist and engineer" |>
-  extract_entity()
+vonNeumann_txt <- "John von Neumann (/vɒn ˈnɔɪmən/ von NOY-mən; Hungarian: Neumann János Lajos [ˈnɒjmɒn ˈjaːnoʃ ˈlɒjoʃ]; December 28, 1903 – February 8, 1957) was a Hungarian and American mathematician, physicist, computer scientist and engineer" 
+vonNeumann_txt |>  extract_entity()
 ```
 
 
@@ -71,7 +77,7 @@ It is possible to extract a graph from the extracted entities. First, happens th
 Than, the entities are extracted using `extract_entity()`. Than a data frame with the coocurrence of words in sentences or paragraph is build. 
 
 ```{r}
-text <- ""
+vonNeumann_txt |> extract_graph()
 ```
 It cant take a while. So, if you are interested only in some words, so first of all, filter the sentences/paragraphs with such words, than extract the graph.
 

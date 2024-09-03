@@ -1,13 +1,16 @@
+Arquivo para testes na construção do pacote
 
-```{r}
+```{r detach}
+detach("package:sto", unload = TRUE)
+```
+```{r available}
 available::available("sto")
 ```
-
-```{r}
+```{r usethis::use_readme_rm}
+usethis::use_readme_rmd()
 usethis::use_readme_rmd()
 ```
-
-```{r}
+```{r devtools doc build install}
 devtools::document()
 devtools::build()
 devtools::install()
@@ -27,13 +30,15 @@ usethis::use_package("pacote")
 ```{r usethis::use_github}
 devtools::build_readme()
 usethis::use_github()
+# usethis::pr_pull() #
+usethis::pr_push() # empurra
 ```
 
 ```{r build_site_github_pages}
 # Criando página internet com references e articles
 pkgdown::build_site_github_pages()
 ```
-```{r}
+```{r extract_ppn }
 extract_ppn <- function(string) {
   string |>
     stringr::str_extract_all(regex_NomeProprio) |>
@@ -63,7 +68,7 @@ regex_NomeProprio <- "([[:Upper:]][[:Lower:]]+)*"
 
 extract_ppn("José da Silva e Fulano de Tal foram, bla Maria Silva.")
 ```
-```{r}
+```{r, gen_stopwords}
 gen_stopwords(lang = "pt", categories = "V PP")
 ```
 

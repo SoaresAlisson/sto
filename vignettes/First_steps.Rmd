@@ -53,6 +53,11 @@ sto::ll("sto dplyr ggplot2 stringr tidyr")
 ```{r s2ll echoTrue, eval=TRUE, echo=FALSE}
 sto::ll("sto dplyr")
 ```
+It is possible to print the vector of  `library(package)` using the option `print=TRUE`
+```{r ll print}
+sto::ll("rvest stringr dplyr", print = TRUE)
+```
+
 
 ## Generate a string using variables 
 

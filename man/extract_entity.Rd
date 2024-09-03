@@ -11,9 +11,9 @@ extract_entity(text, connect = connectors("misc"), sw = "the")
 \arguments{
 \item{text}{an input text}
 
-\item{sw}{a vector of stopwords}
+\item{connect}{a vector of lowercase connectors. Use use your own, or use the function "connector" to obtain some patterns.}
 
-\item{connectors}{a vector of lowercase connectors. Use use your own, or use the function "connector" to obtain some patterns.}
+\item{sw}{a vector of stopwords}
 }
 \description{
 A rule based entity extractor

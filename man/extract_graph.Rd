@@ -8,7 +8,7 @@ It extracts only if two entities are mentioned in the same token (sentence or pa
 extract_graph(
   text,
   using = "sentences",
-  connectors = connectors("misc"),
+  connect = connectors("misc"),
   sw = gen_stopwords("en")
 )
 }
@@ -17,7 +17,7 @@ extract_graph(
 
 \item{using}{sentence or paragraph to tokenize}
 
-\item{connectors}{lowercase connectors, like the "von" in "John von Neumann".}
+\item{connect}{lowercase connectors, like the "von" in "John von Neumann".}
 
 \item{sw}{stopwords vector.}
 }

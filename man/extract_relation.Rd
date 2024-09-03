@@ -7,9 +7,18 @@
 extract_relation(
   text,
   using = "sentences",
-  connectors = connectors("misc"),
+  connect = connectors("misc"),
   sw = gen_stopwords("en")
 )
+}
+\arguments{
+\item{text}{an input text}
+
+\item{using}{sentence or paragraph to tokenize}
+
+\item{connect}{lowercase connectors, like the "von" in "John von Neumann". To use pre built connectors use `connectors()``}
+
+\item{sw}{stopwords vector. To use pre built stopwords use `gen_stopwords()`}
 }
 \description{
 tokenize and selects only sentences/paragraphs with more than one entity per sentence or paragraph

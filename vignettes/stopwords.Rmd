@@ -48,14 +48,14 @@ gen_stopwords()
 gen_stopwords(lang = "en", categories = "CC")
 gen_stopwords(lang = "pt", categories = "CC DT")
 # to convert the list into a named vector
-gen_stopwords(lang = "en", categories = "CC DT V") |> unlist()
+gen_stopwords(lang = "en", categories = "CC DT V")
 
 gen_stopwords(lang = "pt")
 gen_stopwords(lang = "pt", categories = "V")
 ```
 
 With the `vec` parameter, it is possible to have three different output formats: 
-list (default), vector and named vector.
+list, vector (default) and named vector.
 
 ```{r genSW list vec}
 gen_stopwords(lang = "pt", categories = "V", vec = "list")
@@ -70,7 +70,7 @@ To use only certain kinds of verbs, like only the variations/conjugations of the
 my_sw <- gen_stopwords("pt", "V", vec = "list")
 my_sw$V$ser
 # or shorter
-gen_stopwords("pt", "V", vec = "list")$V$seb
+gen_stopwords("pt", "V", vec = "list")$V$ser
 ```
 
 

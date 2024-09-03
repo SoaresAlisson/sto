@@ -39,7 +39,7 @@ connectors <- function(lang = "pt") {
 #' extracts the entity from a text using regex. This regex captures all uppercase words, words that begin with upper case. If there is sequence of this patterns together, this function also captures.
 #' In the case of proper names with common lower case connectors like "Wwwww of Wwwww" this function also captures the connector and the subsequent uppercase words.
 #' @param text an input text
-#' @param connectors a vector of lowercase connectors. Use use your own, or use the function "connector" to obtain some patterns.
+#' @param connect a vector of lowercase connectors. Use use your own, or use the function "connector" to obtain some patterns.
 #' @param sw a vector of stopwords
 #' @export
 #' @examples
@@ -67,12 +67,16 @@ extract_entity <- function(text, connect = connectors("misc"), sw = "the") {
 
 
 #' tokenize and selects only sentences/paragraphs with more than one entity per sentence or paragraph
+#' @param text an input text
+#' @param using sentence or paragraph to tokenize
+#' @param connect lowercase connectors, like the "von" in "John von Neumann". To use pre built connectors use `connectors()``
+#' @param sw stopwords vector. To use pre built stopwords use `gen_stopwords()`
 #' @export
 #' @examples
 #' "John Does lives in New York in United States of America." |> extract_relation()
 #' "João Ninguém mora em São José do Rio Preto. Ele foi para o Rio de Janeiro." |> extract_relation(connector = connectors("pt"))
 extract_relation <- function(text, using = "sentences",
-                             connectors = connectors("misc"),
+                             connect = connectors("misc"),
                              sw = gen_stopwords("en")) {
   if (using == "sentences" || using == "sent") {
     message("Tokenizing by sentences")
@@ -89,7 +93,7 @@ extract_relation <- function(text, using = "sentences",
   list_w <- lapply(
     X = list_w, \(txt) {
       extract_entity(txt,
-        connector = connectors, sw = sw
+        connect = connect, sw = sw
       )
     }
   )
@@ -106,16 +110,16 @@ extract_relation <- function(text, using = "sentences",
 #' It extracts only if two entities are mentioned in the same token (sentence or paragraph)
 #' @param text an input text
 #' @param using sentence or paragraph to tokenize
-#' @param connectors lowercase connectors, like the "von" in "John von Neumann".
+#' @param connect lowercase connectors, like the "von" in "John von Neumann".
 #' @param sw stopwords vector.
 #' @export
 #' @examples
 #' "John Does lives in New York in United States of America" |> extract_relation()
 # extract_graph(text)
 extract_graph <- function(text, using = "sentences",
-                          connectors = connectors("misc"),
+                          connect = connectors("misc"),
                           sw = gen_stopwords("en")) {
-  list_ent <- text |> extract_relation(using, connectors, sw)
+  list_ent <- text |> extract_relation(using, connect, sw)
   graph <- tibble::tibble(n1 = as.character(""), n2 = as.character(""))
   # list_length <- list_ent |> length()
   lapply(list_ent, \(e) {

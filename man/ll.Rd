@@ -5,7 +5,14 @@
 \title{load libraries from string
 load packages from a char separated by space or commas}
 \usage{
-ll(char, ...)
+ll(char, print = FALSE, ...)
+}
+\arguments{
+\item{char}{character with package names}
+
+\item{print}{if TRUE, will return a string that can be pasted in the console}
+
+\item{...}{additional parameters}
 }
 \description{
 load libraries from string
@@ -13,4 +20,5 @@ load packages from a char separated by space or commas
 }
 \examples{
 sto::ll("rvest stringr dplyr")
+sto::ll("rvest stringr dplyr", print=TRUE)
 }
