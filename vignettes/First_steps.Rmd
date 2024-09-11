@@ -58,7 +58,6 @@ It is possible to print the vector of  `library(package)` using the option `prin
 sto::ll("rvest stringr dplyr", print = TRUE)
 ```
 
-
 ## Generate a string using variables 
 
 Use `f()` and the variable inside curly brackets `{var}`
@@ -133,5 +132,14 @@ c("a", "b", "c", "d") |> gsub2("a", "x")
 "'bla bla1 'bla" |> gsub2("'")
 "'bla bla1 'bla" |> gsub2("bla1")
 ```
+Another function available is `nothing()`, that does nothing, but it is useful when you want to use the native R pipe, so you can comment and uncomment the lines of the pipe, without having to change the last pipe.
+
+```{r fun nothing}
+s2v("a b c d 1 2 3 4") |>
+  grep2("[[:alpha:]]") |>
+  # grep2("[[:digit:]]")  |>
+  nothing()
+```
+
 
 

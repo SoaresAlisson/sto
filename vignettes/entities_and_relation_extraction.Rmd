@@ -22,27 +22,27 @@ library(sto)
 
 The package {sto} also provides a set of tools to extract entities and relations from text. It does so by one of the simples form: by using the rule based approach. It contains a rule based extraction algorithm and a rule based relation extraction algorithm.
 For more advanced NER, there is other packages such as 
-[{crfsuite}](https://cran.r-project.org/web/packages/crfsuite/index.html), {UDpipe} and {spacyR}.
+[{crfsuite}](https://cran.r-project.org/web/packages/crfsuite/index.html), {[UDpipe](https://cran.r-project.org/web/packages/udpipe/)} and {[spacyR](https://spacyr.quanteda.io/)}.
 This functions do not work so well like the NER of the mentioned packages, but we think that, in some situations, they can be better job than joining unigram, bigrams, trigrams and so on.
 Because it is a rule based approach, it is very simple to use and also fast. It will also requires a lot of cleaning, but you have the absolute control over which words are extracted and what is rejected. 
 
 How it works?  
-The function captures all words that 
-- begins with uppercase, 
-- followed by other uppercases, lowercase or numbers, without white space
+The function captures all words that:   
+- begins with uppercase,   
+- followed by other uppercases, lowercase or numbers, without white space  
 - it can contain symbols like `_`, `-` or `.`.
 
 In this way, words like "Covid-19" are also captured
 In languages such as English and Portuguese, it extracts proper names. In German, it also extracts nouns.
 
 There is some trade-off, of course.
-It will capture a lot of undesired words and will demand posterior cleaning, like:
-- It does not contain any sort of built-in classification.
+It will capture a lot of undesired words and will demand posterior cleaning, like:  
+- It does not contain any sort of built-in classification.  
 - "Obama Chief of Staff Rahm Emanuel" will be captured as one entity, what is not wrong et al, but maybe not what we expect.
 
 The downsides are 
 
- it will not capture:
+ It will not capture:
 - entities that begin with lowercase
 
 ```{r NER}
@@ -65,8 +65,8 @@ connectors("misc")
 "João Ninguém mora em São José do Rio Preto. Ele esteve antes em Sergipe" |>
   extract_entity(connect = connectors("pt"))
 
-vonNeumann_txt <- "John von Neumann (/vɒn ˈnɔɪmən/ von NOY-mən; Hungarian: Neumann János Lajos [ˈnɒjmɒn ˈjaːnoʃ ˈlɒjoʃ]; December 28, 1903 – February 8, 1957) was a Hungarian and American mathematician, physicist, computer scientist and engineer" 
-vonNeumann_txt |>  extract_entity()
+vonNeumann_txt <- "John von Neumann (/vɒn ˈnɔɪmən/ von NOY-mən; Hungarian: Neumann János Lajos [ˈnɒjmɒn ˈjaːnoʃ ˈlɒjoʃ]; December 28, 1903 – February 8, 1957) was a Hungarian and American mathematician, physicist, computer scientist and engineer"
+vonNeumann_txt |> extract_entity()
 ```
 
 

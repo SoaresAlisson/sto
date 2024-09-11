@@ -114,7 +114,8 @@ extract_relation <- function(text, using = "sentences",
 #' @param sw stopwords vector.
 #' @export
 #' @examples
-#' "John Does lives in New York in United States of America" |> extract_relation()
+#' txt <- "John Does lives in New York in United States of America. He  is a passionate jazz musician, often playing in local clubs."
+#' extract_graph(txt)
 # extract_graph(text)
 extract_graph <- function(text, using = "sentences",
                           connect = connectors("misc"),

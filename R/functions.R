@@ -1,12 +1,17 @@
 # Functions
 
-#' To easily paste and collpase chars objects into one string
-#' A wrapper for glue::glue
+#' To easily paste and collapse chars objects into one string.
+#' A wrapper for glue::glue.
 #' @export
+#'
+#' @examples
+#' x <- 9+12
+#' y <- "Lorem ipsum"
+#' f("Numers are: {x}, and the text is: {y}")
 f <- glue::glue
 library(magrittr)
 
-#' transform string to firts capitalized, except join words*
+#' transform string to first capitalized, except join words*.
 # to_title <- function
 # stringr::str_to_title(orgaoJulgadorPorExtenso, locale = "pt"),
 #         orgaoJulgadorPorExtenso = gsub(" D([aeo]) ", " d\\1 ", orgaoJulgadorPorExtenso
@@ -18,6 +23,7 @@ library(magrittr)
 #' @param arg2 replacement
 #' @param ... arguments passed to gsub.
 #' @export
+#'
 #' @examples
 #' c("a", "b", "c", "d") |> gsub2("a", "x")
 #' # in the case of character
@@ -28,7 +34,7 @@ gsub2 <- function(x, arg1, arg2 = "", ic = FALSE, ...) {
   gsub(arg1, arg2, x, ignore.case = ic)
 }
 
-#' A grep to be used with native pipe |>
+#' A grep to be used with native pipe '|>'.
 #'
 #' grep2 is a wraper around the traditional grep, that works with native pipe,
 #' returns value and are ignore case as default
@@ -37,6 +43,7 @@ gsub2 <- function(x, arg1, arg2 = "", ic = FALSE, ...) {
 #' @param ic ignore case
 #' @param ... arguments passed to grep. See ?grep for more details
 #' @export
+#'
 #' @examples
 #' c("a", "b", "c", "d") |> grep2("a")
 grep2 <- function(x, arg1, ic = T, value = TRUE, ...) {
@@ -44,11 +51,13 @@ grep2 <- function(x, arg1, ic = T, value = TRUE, ...) {
 }
 
 #' grepl to be used with native pipe |>
+#'
 #' @param x data to search
 #' @param arg1 pattern
 #' @param ic ignore case
 #' @param ... arguments passed to grepl.
 #' @export
+#'
 #' @examples
 #' c("a", "b", "c", "d") |> grepl2("a")
 grepl2 <- function(x, arg1, ic = TRUE, ...) {
@@ -56,13 +65,16 @@ grepl2 <- function(x, arg1, ic = TRUE, ...) {
 }
 
 
-#' convert a string to vector of elements.
+#' Convert a string into a vector of elements.
+#'
 #' Easily transform a character string into a vector of elements.
 #' @param char character to be transformed
 #' @param sep separator
 #' @param wss whitespace substitution. Which character will be used in the end to be converted into white space
 #' @param print if TRUE, will return a string that can be pasted in the console
+#'
 #' @export
+#'
 #' @examples
 #' "a b c d" |> s2v(r
 #' # strips white spaces
@@ -93,7 +105,8 @@ s2v <- function(char, sep = " |\\n|\\t|\\r", wss = "_", print = FALSE) {
 }
 
 
-#' list of strings to list of vectors
+#' list of strings to list of vectors.
+#'
 #' string to vec from list of nested elements of text
 ls2v <- function(char, sep = " |\\n|\\t|\\r", wss = "_") {
   # apply_strsplit_recursive <- function(x, split = " |\\n|\\t|\\r", wss = "_") {
@@ -120,11 +133,13 @@ ls2v <- function(char, sep = " |\\n|\\t|\\r", wss = "_") {
 
 
 #' load libraries from string
+#'
 #' load packages from a char separated by space or commas
-#' @param char character with package names
+#' @param char character with package named
 #' @param print if TRUE, will return a string that can be pasted in the console
 #' @param ... additional parameters
 #' @export
+#' 
 #' @examples
 #' sto::ll("rvest stringr dplyr")
 #' sto::ll("rvest stringr dplyr", print=TRUE)
@@ -145,8 +160,9 @@ sapply(packages, \(lib) f("library({lib})"))  |>
   } 
 }
 
-#' install libraries from string
-#' given a char with package names, separated by spaces and/or commas, install all the packages
+#' Install libraries from string.
+#'
+#' Given a char with package names, separated by spaces and/or commas, install all the packages
 #' @param char string with package names
 #' @param installer choose which installer to be used: "install.package" (default), "pak", "dev_git" for devtools::install_github
 #' @param ... Additional parameters
@@ -188,8 +204,9 @@ count_vec <- function(vec, sort_n = TRUE) {
   tibble::as_tibble(vec_count)
 }
 
-#' extract all chars
-#' Inspired by stringr::str_extract_all(), but with ignore case option
+#' extract all chars.
+#'
+#' Inspired by stringr::str_extract_all(), but with ignore case option.
 #' @export
 #' @examples
 #' "bla bla bla Foo ble ble" |> s_extract_all("foo")
@@ -210,3 +227,23 @@ s_extract_all <- function(txt, pattern, IC = TRUE, unl = FALSE) {
 }
 
 # para erros na requisisção, ver tribunaisTrabalho TODO2
+
+#' An empty function.
+#'
+#' An empty function that does nothing, just returns the input. It is useful when developing and testing pipes, placed in the end of pipes, so the developer can comment and uncomment lines of pipes easily, instead of adding or deleting the last coma or pipe in the last line.
+#' @export
+#'
+#' @examples
+#' s2v("a b c d 1 2 3 4") |>
+#' grep2("[[:alpha:]]") |> # select all letters
+#' # grep2("[[:digit:]]")  |> # select all numbers
+#' nothing()
+#' 
+#' # Changing the commented lines: 
+#' s2v("a b c d 1 2 3 4") |>
+#' # grep2("[[:alpha:]]") |> # select all letters
+#' grep2("[[:digit:]]")  |> # select all numbers
+#' nothing()
+nothing <- function(input) {
+  return(input) 
+}
