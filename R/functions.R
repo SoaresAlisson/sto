@@ -7,7 +7,7 @@
 #' @examples
 #' x <- 9+12
 #' y <- "Lorem ipsum"
-#' f("Numers are: {x}, and the text is: {y}")
+#' f('Number is: {x}, and the text is: "{y}"')
 f <- glue::glue
 library(magrittr)
 

@@ -112,18 +112,19 @@ extract_relation <- function(text, using = "sentences",
 #' @param using sentence or paragraph to tokenize
 #' @param connect lowercase connectors, like the "von" in "John von Neumann".
 #' @param sw stopwords vector.
+#' @param loop if TRUE, it will not remove loops, a node pointing to itself.
 #' @export
 #' @examples
-#' txt <- "John Does lives in New York in United States of America. He  is a passionate jazz musician, often playing in local clubs."
-#' extract_graph(txt)
-# extract_graph(text)
+#' text <- "John Does lives in New York in United States of America. He  is a passionate jazz musician, often playing in local clubs."
+#' extract_graph(text)
 extract_graph <- function(text, using = "sentences",
                           connect = connectors("misc"),
-                          sw = gen_stopwords("en")) {
+                          sw = gen_stopwords("en"),
+                          loop = FALSE) {
   list_ent <- text |> extract_relation(using, connect, sw)
   graph <- tibble::tibble(n1 = as.character(""), n2 = as.character(""))
   # list_length <- list_ent |> length()
-  lapply(list_ent, \(e) {
+  graph <- lapply(list_ent, \(e) {
     items <- e |> combn(2, simplify = FALSE)
     items_length <- length(items)
     lapply(1:items_length, \(x) {
@@ -135,4 +136,12 @@ extract_graph <- function(text, using = "sentences",
       dplyr::filter(n1 != "")
   }) |>
     dplyr::bind_rows()
+
+  if (!loop) {
+    graph <- graph |>
+      dplyr::mutate(loop = (n1 == n2)) |>
+      dplyr::filter(loop == FALSE) |>
+      dplyr::select(-loop)
+  }
+  return(graph)
 }
