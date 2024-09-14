@@ -2,7 +2,7 @@
 % Please edit documentation in R/functions.R
 \name{grep2}
 \alias{grep2}
-\title{A grep to be used with native pipe |>}
+\title{A grep to be used with native pipe '|>'.}
 \usage{
 grep2(x, arg1, ic = T, value = TRUE, ...)
 }

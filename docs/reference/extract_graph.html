@@ -72,7 +72,8 @@ It extracts only if two entities are mentioned in the same token (sentence or pa
 <span>  <span class="va">text</span>,</span>
 <span>  using <span class="op">=</span> <span class="st">"sentences"</span>,</span>
 <span>  connect <span class="op">=</span> <span class="fu"><a href="connectors.html">connectors</a></span><span class="op">(</span><span class="st">"misc"</span><span class="op">)</span>,</span>
-<span>  sw <span class="op">=</span> <span class="fu"><a href="gen_stopwords.html">gen_stopwords</a></span><span class="op">(</span><span class="st">"en"</span><span class="op">)</span></span>
+<span>  sw <span class="op">=</span> <span class="fu"><a href="gen_stopwords.html">gen_stopwords</a></span><span class="op">(</span><span class="st">"en"</span><span class="op">)</span>,</span>
+<span>  loop <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -95,12 +96,16 @@ It extracts only if two entities are mentioned in the same token (sentence or pa
 <dt id="arg-sw">sw<a class="anchor" aria-label="anchor" href="#arg-sw"></a></dt>
 <dd><p>stopwords vector.</p></dd>
 
+
+<dt id="arg-loop">loop<a class="anchor" aria-label="anchor" href="#arg-loop"></a></dt>
+<dd><p>if TRUE, it will not remove loops, a node pointing to itself.</p></dd>
+
 </dl></div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">txt</span> <span class="op">&lt;-</span> <span class="st">"John Does lives in New York in United States of America. He  is a passionate jazz musician, often playing in local clubs."</span></span></span>
-<span class="r-in"><span><span class="fu">extract_graph</span><span class="op">(</span><span class="va">txt</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">text</span> <span class="op">&lt;-</span> <span class="st">"John Does lives in New York in United States of America. He  is a passionate jazz musician, often playing in local clubs."</span></span></span>
+<span class="r-in"><span><span class="fu">extract_graph</span><span class="op">(</span><span class="va">text</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Tokenizing by sentences</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 2</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   n1                       n2                      </span>

@@ -2,14 +2,12 @@
 % Please edit documentation in R/functions.R
 \name{s_extract_all}
 \alias{s_extract_all}
-\title{extract all chars
-Inspired by stringr::str_extract_all(), but with ignore case option}
+\title{extract all chars.}
 \usage{
 s_extract_all(txt, pattern, IC = TRUE, unl = FALSE)
 }
 \description{
-extract all chars
-Inspired by stringr::str_extract_all(), but with ignore case option
+Inspired by stringr::str_extract_all(), but with ignore case option.
 }
 \examples{
 "bla bla bla Foo ble ble" |> s_extract_all("foo")

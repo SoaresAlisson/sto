@@ -2,8 +2,7 @@
 % Please edit documentation in R/functions.R
 \name{s2v}
 \alias{s2v}
-\title{convert a string to vector of elements.
-Easily transform a character string into a vector of elements.}
+\title{Convert a string into a vector of elements.}
 \usage{
 s2v(char, sep = " |\\\\n|\\\\t|\\\\r", wss = "_", print = FALSE)
 }
@@ -17,7 +16,6 @@ s2v(char, sep = " |\\\\n|\\\\t|\\\\r", wss = "_", print = FALSE)
 \item{print}{if TRUE, will return a string that can be pasted in the console}
 }
 \description{
-convert a string to vector of elements.
 Easily transform a character string into a vector of elements.
 }
 \examples{

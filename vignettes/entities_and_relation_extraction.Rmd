@@ -81,4 +81,34 @@ vonNeumann_txt |> extract_graph()
 ```
 It cant take a while. So, if you are interested only in some words, so first of all, filter the sentences/paragraphs with such words, than extract the graph.
 
+```{r ex wikipedia}
+page <- "https://en.wikipedia.org/wiki/GNU_General_Public_License" |> rvest::read_html()
+text <- page |>
+  rvest::html_nodes("p") |>
+  rvest::html_text()
+text
+g <- text |> extract_graph(sw = gen_stopwords("en", include = "The This It"))
+g
+g_N <- g |> dplyr::count(n1, n2, sort = T)
+g_N
+```
+
+```{r ploting the graph}
+plot_graph(text, g_N)
+```
+
+```{r ex2 wiki Silge}
+page <- "https://en.wikipedia.org/wiki/Julia_Silge" |> rvest::read_html()
+text <- page |>
+  rvest::html_nodes("p") |>
+  rvest::html_text()
+text
+g <- text |> extract_graph(sw = gen_stopwords("en", include = "The This It"))
+g_N <- g |> dplyr::count(n1, n2, sort = T)
+
+plot_graph(text, g_N)
+```
+
+
+
 

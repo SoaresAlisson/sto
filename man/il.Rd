@@ -2,8 +2,7 @@
 % Please edit documentation in R/functions.R
 \name{il}
 \alias{il}
-\title{install libraries from string
-given a char with package names, separated by spaces and/or commas, install all the packages}
+\title{Install libraries from string.}
 \usage{
 il(char, installer = "install.package", ...)
 }
@@ -15,6 +14,5 @@ il(char, installer = "install.package", ...)
 \item{...}{Additional parameters}
 }
 \description{
-install libraries from string
-given a char with package names, separated by spaces and/or commas, install all the packages
+Given a char with package names, separated by spaces and/or commas, install all the packages
 }

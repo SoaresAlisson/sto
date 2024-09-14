@@ -2,7 +2,7 @@
 % Please edit documentation in R/functions.R
 \name{gsub2}
 \alias{gsub2}
-\title{transform string to firts capitalized, except join words*
+\title{transform string to first capitalized, except join words*.
 A gsub to be used easily with native pipe |>
 gsub2 is just a wrapper around gsub}
 \usage{
@@ -18,7 +18,7 @@ gsub2(x, arg1, arg2 = "", ic = FALSE, ...)
 \item{...}{arguments passed to gsub.}
 }
 \description{
-transform string to firts capitalized, except join words*
+transform string to first capitalized, except join words*.
 A gsub to be used easily with native pipe |>
 gsub2 is just a wrapper around gsub
 }

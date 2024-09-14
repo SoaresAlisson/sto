@@ -9,7 +9,8 @@ extract_graph(
   text,
   using = "sentences",
   connect = connectors("misc"),
-  sw = gen_stopwords("en")
+  sw = gen_stopwords("en"),
+  loop = FALSE
 )
 }
 \arguments{
@@ -20,11 +21,14 @@ extract_graph(
 \item{connect}{lowercase connectors, like the "von" in "John von Neumann".}
 
 \item{sw}{stopwords vector.}
+
+\item{loop}{if TRUE, it will not remove loops, a node pointing to itself.}
 }
 \description{
 Extract a non directional graph based on co-occurrence in the token.
 It extracts only if two entities are mentioned in the same token (sentence or paragraph)
 }
 \examples{
-"John Does lives in New York in United States of America" |> extract_relation()
+text <- "John Does lives in New York in United States of America. He  is a passionate jazz musician, often playing in local clubs."
+extract_graph(text)
 }

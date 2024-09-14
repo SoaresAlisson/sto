@@ -2,8 +2,8 @@
 % Please edit documentation in R/functions.R
 \name{f}
 \alias{f}
-\title{To easily paste and collpase chars objects into one string
-A wrapper for glue::glue}
+\title{To easily paste and collapse chars objects into one string.
+A wrapper for glue::glue.}
 \usage{
 f(
   ...,
@@ -20,6 +20,11 @@ f(
 )
 }
 \description{
-To easily paste and collpase chars objects into one string
-A wrapper for glue::glue
+To easily paste and collapse chars objects into one string.
+A wrapper for glue::glue.
+}
+\examples{
+x <- 9+12
+y <- "Lorem ipsum"
+f('Number is: {x}, and the text is: "{y}"')
 }

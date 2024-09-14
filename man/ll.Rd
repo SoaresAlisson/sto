@@ -2,20 +2,18 @@
 % Please edit documentation in R/functions.R
 \name{ll}
 \alias{ll}
-\title{load libraries from string
-load packages from a char separated by space or commas}
+\title{load libraries from string}
 \usage{
 ll(char, print = FALSE, ...)
 }
 \arguments{
-\item{char}{character with package names}
+\item{char}{character with package named}
 
 \item{print}{if TRUE, will return a string that can be pasted in the console}
 
 \item{...}{additional parameters}
 }
 \description{
-load libraries from string
 load packages from a char separated by space or commas
 }
 \examples{

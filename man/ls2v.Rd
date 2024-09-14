@@ -2,12 +2,10 @@
 % Please edit documentation in R/functions.R
 \name{ls2v}
 \alias{ls2v}
-\title{list of strings to list of vectors
-string to vec from list of nested elements of text}
+\title{list of strings to list of vectors.}
 \usage{
 ls2v(char, sep = " |\\\\n|\\\\t|\\\\r", wss = "_")
 }
 \description{
-list of strings to list of vectors
 string to vec from list of nested elements of text
 }
