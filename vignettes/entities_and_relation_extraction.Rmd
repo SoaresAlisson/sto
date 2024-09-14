@@ -86,7 +86,7 @@ page <- "https://en.wikipedia.org/wiki/GNU_General_Public_License" |> rvest::rea
 text <- page |>
   rvest::html_nodes("p") |>
   rvest::html_text()
-text
+str(text)
 g <- text |> extract_graph(sw = gen_stopwords("en", include = "The This It"))
 g
 g_N <- g |> dplyr::count(n1, n2, sort = T)
