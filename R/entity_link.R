@@ -64,7 +64,56 @@ extract_entity <- function(text, connect = connectors("misc"), sw = "the") {
   text_vec[!text_vec %in% stringr::str_to_title(sw)]
 }
 
+#' Substitute proper names/entities spaces with underscore in the text.
+#'
+#' given a text and a vector of entities, it substitutes the spaces with underscores, so the entities are identified.
+#'
+#' @param text an input text
+#' @param entities an input vector, as exported by `extract_entity()`
+#' @export
+#' @examples
+#' texto_teste <- "José da Silva e Fulano de Tal foram, bla Maria Silva. E depois disso, bla Joaquim José da Silva Xavier no STF"
+#' ppn <- texto_teste |> extract_entity(connectors("pt"), sw = gen_stopwords("pt"))
+#' texto_teste |> subs_entity(ppn)
+#' texto_teste |> subs_entity(ppn, method = "loop")
+#' text <- texto_teste |> subs_entity(ppn)
+#' text
+# text |>
+#   strsplit(" ") |>
+#   unlist() |>
+#   count_vec()
+subs_entity <- function(text, entities, method = "normal") {
+  # entities <- texto_teste |> extract_entity(connectors("pt"), sw = gen_stopwords("pt"))
+  entities <- entities |> unlist()
 
+
+  if (method == "loop") {
+    ent_df <- data.frame(entities = unique(entities)) |>
+      dplyr::mutate(
+        entities2 = gsub(" ", "_", entities),
+        entities = gsub(" ", "[ _]", entities)
+      )
+
+    for (i in 1:nrow(ent_df)) {
+      message("processing ", i, " of ", nrow(ent_df))
+      text <- text |>
+        stringr::str_replace_all(ent_df[i, "entities"], ent_df[i, "entities2"])
+    }
+  } else if (method == "normal") {
+    entities2 <- grep2(entities, " ")
+    # named_vec <- stringr::str_replace_all(entities, " ", "_")
+    named_vec <- gsub(" ", "_", entities2)
+    # names(named_vec) <- entities2
+    names(named_vec) <- gsub(" ", "[ _]", entities2)
+
+    # text <- purrr::map2_chr(ent_df$entities, ent_df$entities2, ~ stringr::str_replace_all(text, .x, .y))
+    text <- stringr::str_replace_all(text, named_vec)
+  }
+
+  return(text)
+}
+# "asdc,casd_asd. Asc" |> stringr::str_extract_all("\\W+")
+# c("as as", "Joaquim cas", "as_cas", "asdcasdc") |> sto::grep2("\\W")
 
 #' tokenize and selects only sentences/paragraphs with more than one entity per sentence or paragraph
 #' @param text an input text
@@ -145,6 +194,16 @@ extract_graph <- function(text, using = "sentences",
   }
   return(graph)
 }
+
+
+#' extract a graph from text, using custom regex pattern as nodes.
+#'
+#' @return a graph
+extract_graph_rgx <- function(text, pattern, sw = gen_stopwords("en"), count_graphs = FALSE) {
+  text
+}
+
+
 
 #' plot a network of coocurrence of terms
 #'

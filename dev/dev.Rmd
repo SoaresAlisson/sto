@@ -104,6 +104,30 @@ plot_graph <- function(text, df, head_n = 30) {
     ggplot2::theme(legend.position = "none")
 }
 ```
+```{r fun subs_entity}
+#' Substitute proper names/entities spaces with underscore in the text.
+subs_entity <- function(text, entities) {
+  entities <- entities |> unlist()
+
+  ent_df <- data.frame(entities = unique(entities)) |>
+    dplyr::mutate(entities2 = gsub(" ", "_", entities))
+
+  # text |> stringr::str_replace_all(ent_df$entities, ent_df$entities2)
+  # sapply(1:nrow(ent_df), \(i) {
+  #   text |> stringr::str_replace_all(ent_df[i, "entities"], ent_df[i, "entities2"])  })
+  for (i in 1:nrow(ent_df)) {
+    text <- text |>
+      stringr::str_replace_all(ent_df[i, "entities"], ent_df[i, "entities2"])
+  }
+  return(text)
+}
+
+ent_test <- texto_teste |>
+  extract_ppn()
+# extract_entity()
+subs_entity(texto_teste, ent_test)
+```
+
 
 
 

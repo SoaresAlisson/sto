@@ -3,16 +3,39 @@
 # IN 	preposition, subordinating conjunction
 IN: of for in by
 # DT 	determiner
-DT: a the
+DT: a the this
 # CC 	coordinating conjunction
-CC: and but or
+CC: and but or for but yet so
 #CD 	cardinal number
 CD: zero one two three four five first second third fourth fifth sixth seventh eighth ninth tenth
+#JJ	adjective
+JJ: blue happy sad
+# JJR	adjective, comparative	bluer, happier
+JJR: bluer happier
+# JJS	adjective, superlative	bluest, happiest
+JJS: bluest happiest
+# LS	list marker	1)
+# MD	modal	could, will
+MD: could, will
+# PP	personal pronoun
+PP: I you he she it we
 PRP: I you he she we
 #	PRP$ 	Possessive pronoun
-PRP$: your mine ours
+PPZ: your my mine ours his her
+# RB: adverb
+RB: however usually naturally here good
+# RBR	adverb, comparative	better
+RBR: better
+# RBS	adverb, superlative	best
+# RBS:	best
+# UH	interjection	aha
+UH: aha
 #RP 	particle
 RP: up off
 # V verb
 V: am are is be can could did do have he is it may might must need no not now of on or she that the to was
 question: what when where who whom why because
+# WDT	wh-determiner	which, who
+# WP	wh-pronoun	who, what
+# WP$	possessive wh-pronoun	whose
+# WRB	wh-abverb	where, when

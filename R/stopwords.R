@@ -1,3 +1,28 @@
+#' show all stopwords categories of a language
+#'
+#' @export
+#'
+#' @examples
+#' read_sw_yml("pt")
+#' read_sw_yml("en")
+read_sw_yml <- function(lang) {
+  # lang = "pt"
+  file_name <- paste0("stopwords_", lang, ".yml") |> tolower()
+  yaml_file_path <- system.file("stopwords", file_name, package = "sto")
+  
+  if (!yaml_file_path |> file.exists()) {
+    paste0(
+      'Error in "', lang,
+      '": language not found. Please specify a valid language'
+    ) |>
+      stop()
+  }
+  
+   yaml_file_path |> yaml::read_yaml() |> sto::ls2v() 
+}
+
+
+
 #' Generates a stopwords list of terms
 #' Function to generate a list of stopwords for a given language using grammar categories.
 #'

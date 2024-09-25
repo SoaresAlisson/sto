@@ -151,11 +151,14 @@ if (print == FALSE) {
     stringi::stri_remove_empty() |>
     lapply(library, character.only = TRUE, ...)
   } else if (print == TRUE){
-  packages <- gsub(",|;", " ", char) |>
+  
+    packages <- gsub(",|;", " ", char) |>
     s2v() |>
     stringi::stri_remove_empty()
+
 sapply(packages, \(lib) f("library({lib})"))  |>
       paste(collapse = "\n") |>
+      unlist() |> unique() |> 
       cat()
   } 
 }
