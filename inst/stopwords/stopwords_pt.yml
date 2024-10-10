@@ -12,7 +12,7 @@ CC: e ou mas que porque por_que porquê por_quê se como
 PP: eu tu ele ela você nós vós eles elas vocês me te se o a lhe nos vos os as mim ti si consigo conosco convosco consigo
 PPZ: meu teu seu sua nosso nossos nossa nossas dele dela deles delas
 #interjection:
-UH: ai ah oh ei ui uhu wow uou psiu fiu caramba opa uhu wow credo né neh pqp vtnc caralho por porra meo bosta merda cocô
+UH: ai ah eh oh ei ui uhu wow uou psiu fiu caramba opa uhu wow credo né neh pqp vtnc caralho por porra meo bosta merda cocô
 demonstrativo: este esse aquele isto isso
 #CD 	cardinal number
 CD: primeiro segundo terceiro quarto quinto sexto sétimo oitavo nono décimo vigésimo trigésimo quadrigésimo quinquagésimo sexagésimo septuagésimo setuagésimo octogésimo nonagésimo centésimo ducentésimo trecentésimo quadringentésimo quingentésimo seiscentésimo sexcentésimo septingentésimo setingentésimo octingentésimo nongentésimo milésimo milionésimo bilionésimo
@@ -21,7 +21,7 @@ conclusion: assim logo então portanto pois segue-se porque consequentemente dep
 #ser ser é sou são somos era eram éramos estar estou está estava estará estávamos ter tenho tinha tinham tens tenham têem teria teriam haver há houve havia
 # pronomes de tratamento https://www.todamateria.com.br/pronomes-de-tratamento/
 PT:
-  ext: Senhoras Senhores Excelentíssimo Doutor Doutora
+  ext: Senhor Senhoras Senhores Excelentíssimo Excelentíssimos Excelentíssima Doutor Doutora Doutores
   abbr: Exmo. Exmos. Sr. Sra. Dr. Dra. V.Mag V.Ex. V.Ex.a V.Ex.as V.S.a V.Ex.a Rev.ma V.A. VV.AA. V.S.
 V:
   ser: ser sou sois é és somos sois são era eram éramos serei será serão serás fui foste foi fomos fostes foram  era eras era éramos éreis eram  serei serás será seremos sereis serão seja sejam

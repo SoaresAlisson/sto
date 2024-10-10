@@ -115,8 +115,10 @@ libraries. So, instead of</p>
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/SoaresAlisson/sto" class="external-link">sto</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://stringr.tidyverse.org" class="external-link">stringr</a></span><span class="op">)</span></span></code></pre></div>
-<p>To load many packages with {string operations} simply use
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://stringr.tidyverse.org" class="external-link">stringr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span></span></code></pre></div>
+<p>To load many packages with {string operations} simply use the load
+libraries function, or <code><a href="../reference/ll.html">ll()</a></code>, ex.:
 <code>sto::ll("package1 package2 package3 ...")</code>:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">sto</span><span class="fu">::</span><span class="fu"><a href="../reference/ll.html">ll</a></span><span class="op">(</span><span class="st">"sto dplyr ggplot2 stringr tidyr"</span><span class="op">)</span></span></code></pre></div>
@@ -135,8 +137,9 @@ libraries. So, instead of</p>
 <span><span class="co">#&gt; [[2]]</span></span>
 <span><span class="co">#&gt;  [1] "dplyr"     "sto"       "nvimcom"   "stats"     "graphics"  "grDevices"</span></span>
 <span><span class="co">#&gt;  [7] "utils"     "datasets"  "methods"   "base"</span></span></code></pre>
-<p>It is possible to print the vector of <code><a href="https://rdrr.io/r/base/library.html" class="external-link">library(package)</a></code>
-using the option <code>print=TRUE</code></p>
+<p>Instead of loading the packages, it is also possible to print the
+vector of <code><a href="https://rdrr.io/r/base/library.html" class="external-link">library(package)</a></code> using the option
+<code>print=TRUE</code></p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">sto</span><span class="fu">::</span><span class="fu"><a href="../reference/ll.html">ll</a></span><span class="op">(</span><span class="st">"rvest stringr dplyr"</span>, print <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="co">#&gt; library(rvest)</span></span>
@@ -156,7 +159,7 @@ using the option <code>print=TRUE</code></p>
 <span><span class="st">  {lorem}"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Bla bla: 1824. Ble ble:</span></span>
 <span><span class="co">#&gt; Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</span></span></code></pre></div>
-<p>The <code><a href="../reference/f.html">f()</a></code> is just a wrapper around
+<p>Note: The <code><a href="../reference/f.html">f()</a></code> is a wrapper around
 <code><a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue::glue()</a></code> to use it even more easily.</p>
 <p>Another facility is to easily create vector from char text</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
@@ -237,16 +240,23 @@ wrapper around this functions</p>
 <span><span class="co">#&gt; [1] "bla bla1 bla"</span></span>
 <span><span class="st">"'bla bla1 'bla"</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/gsub2.html">gsub2</a></span><span class="op">(</span><span class="st">"bla1"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "'bla  'bla"</span></span></code></pre></div>
-<p>Another function available is <code><a href="../reference/nothing.html">nothing()</a></code>, that does
-nothing, but it is useful when you want to use the native R pipe, so you
-can comment and uncomment the lines of the pipe, without having to
-change the last pipe.</p>
+<p>Another function available is <code><a href="../reference/nothing.html">nothing()</a></code>, that does…
+nothing! It just passes the input, but it is useful when you want to use
+the native R pipe, so you can comment and uncomment the lines without
+worrying to change the last pipe.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/s2v.html">s2v</a></span><span class="op">(</span><span class="st">"a b c d 1 2 3 4"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/grep2.html">grep2</a></span><span class="op">(</span><span class="st">"[[:alpha:]]"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="co"># grep2("[[:digit:]]")  |&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/nothing.html">nothing</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "a" "b" "c" "d"</span></span></code></pre></div>
+<p>The items of the pipe can easily be changed:</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/s2v.html">s2v</a></span><span class="op">(</span><span class="st">"a b c d 1 2 3 4"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="co"># grep2("[[:alpha:]]") |&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/grep2.html">grep2</a></span><span class="op">(</span><span class="st">"[[:digit:]]"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/nothing.html">nothing</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "1" "2" "3" "4"</span></span></code></pre></div>
 </div>
 </div>
   </div>

@@ -12,6 +12,7 @@
 <url><loc>/reference/extract_abbrev.html</loc></url>
 <url><loc>/reference/extract_entity.html</loc></url>
 <url><loc>/reference/extract_graph.html</loc></url>
+<url><loc>/reference/extract_graph_rgx.html</loc></url>
 <url><loc>/reference/extract_ppn.html</loc></url>
 <url><loc>/reference/extract_relation.html</loc></url>
 <url><loc>/reference/f.html</loc></url>
@@ -30,6 +31,8 @@
 <url><loc>/reference/s2ppn.html</loc></url>
 <url><loc>/reference/s2v.html</loc></url>
 <url><loc>/reference/s_extract_all.html</loc></url>
+<url><loc>/reference/show_sw.html</loc></url>
 <url><loc>/reference/shuffle_time.html</loc></url>
+<url><loc>/reference/subs_ppn.html</loc></url>
 </urlset>
 

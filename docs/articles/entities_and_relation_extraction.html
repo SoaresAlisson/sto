@@ -77,7 +77,8 @@
 
 
 
-      </header><div class="row">
+      </header><link href="entities_and_relation_extraction_files/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+<script src="entities_and_relation_extraction_files/htmlwidgets-1.6.4/htmlwidgets.js"></script><script src="entities_and_relation_extraction_files/d3-4.5.0/d3.min.js"></script><script src="entities_and_relation_extraction_files/forceNetwork-binding-0.4/forceNetwork.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Entities and relation extraction</h1>
@@ -107,7 +108,15 @@ that, in some situations, they can be better job than joining unigram,
 bigrams, trigrams and so on. Because it is a rule based approach, it is
 very simple to use and also fast. It will also requires a lot of
 cleaning, but you have the absolute control over which words are
-extracted and what is rejected.</p>
+extracted and what words are rejected.</p>
+<p>In Natural Language Processing, to find proper names or terms that
+frequently appears together is called “collocation”, e.g., to find
+“United Kingdom”. You can learn more what is collocation and its
+statistical details and r function in this <a href="https://sigil.r-forge.r-project.org/materials/04_collocation_analysis.pdf" class="external-link">article</a>,
+and it is also possible to functions like <a href="https://quanteda.io/reference/textstat_collocations.html" class="external-link"><code>quanteda.textstats::textstat_collocations()</code></a>,
+<a href="https://cran.r-project.org/web/packages/TextForecast/" class="external-link"><code>TextForecast::get_collocations()</code></a>
+to identify them, but it also will require a lot of data cleaning,
+specially if you want is proper names.</p>
 <p>How it works?<br>
 The function captures all words that:<br>
 - begins with uppercase,<br>
@@ -122,9 +131,14 @@ also extracts nouns.</p>
 undesired words and will demand posterior cleaning, like:<br>
 - It does not contain any sort of built-in classification.<br>
 - “Obama Chief of Staff Rahm Emanuel” will be captured as one entity,
-what is not wrong et al, but maybe not what we expect.</p>
+what is not wrong et al, but maybe not what was expect.</p>
 <p>The downsides are</p>
 <p>It will not capture: - entities that begin with lowercase</p>
+<p>In my experience, this approach works better to certain types of text
+than others. Books, formal articles can be a good option that works well
+with this function. Text from social media, because it lacks formalities
+of the language and have a lot of types, it will not work so well.</p>
+<p>So, let’s extract some proper names from a simple text:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="st">"John Does lives in New York in United States of America."</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/extract_entity.html">extract_entity</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "John Does"                "New York"                </span></span>
@@ -140,9 +154,10 @@ what is not wrong et al, but maybe not what we expect.</p>
 <span><span class="fu"><a href="../reference/connectors.html">connectors</a></span><span class="op">(</span><span class="st">"port"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "da"  "das" "de"  "do"  "dos"</span></span>
 <span></span>
-<span><span class="co"># by default, the functions uses the parameter "misc" meaning "miscellaneous".</span></span>
+<span><span class="co"># by default, the functions uses the parameter "misc". meaning "miscellaneous".</span></span>
 <span><span class="fu"><a href="../reference/connectors.html">connectors</a></span><span class="op">(</span><span class="st">"misc"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "of"     "the"    "of the" "von"    "van"    "del"</span></span></code></pre></div>
+<p>Using with other languages:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="st">"João Ninguém mora em São José do Rio Preto. Ele esteve antes em Sergipe"</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/extract_entity.html">extract_entity</a></span><span class="op">(</span>connect <span class="op">=</span> <span class="fu"><a href="../reference/connectors.html">connectors</a></span><span class="op">(</span><span class="st">"pt"</span><span class="op">)</span><span class="op">)</span></span>
@@ -161,7 +176,7 @@ what is not wrong et al, but maybe not what we expect.</p>
 <p>It is possible to extract a graph from the extracted entities. First,
 happens the tokenization by sentence or paragraph. Than, the entities
 are extracted using <code><a href="../reference/extract_entity.html">extract_entity()</a></code>. Than a data frame
-with the coocurrence of words in sentences or paragraph is build.</p>
+with the co-occurrence of words in sentences or paragraph is build.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">vonNeumann_txt</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/extract_graph.html">extract_graph</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Tokenizing by sentences</span></span>
@@ -179,17 +194,22 @@ with the coocurrence of words in sentences or paragraph is build.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> NOY-             Neumann János Lajos</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> NOY-             December           </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 17 more rows</span></span></span></code></pre></div>
-<p>It cant take a while. So, if you are interested only in some words,
-so first of all, filter the sentences/paragraphs with such words, than
-extract the graph.</p>
+<p>This process can take a while to run if the text/corpus is big. So,
+if you are interested only in some words, so first of all, filter the
+sentences/paragraphs with the desired words, and after that, extract the
+graph. Seeing another example, extracting from a wikipedia article:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">page</span> <span class="op">&lt;-</span> <span class="st">"https://en.wikipedia.org/wiki/GNU_General_Public_License"</span> <span class="op">|&gt;</span> <span class="fu">rvest</span><span class="fu">::</span><span class="fu"><a href="http://xml2.r-lib.org/reference/read_xml.html" class="external-link">read_html</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">text</span> <span class="op">&lt;-</span> <span class="va">page</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">rvest</span><span class="fu">::</span><span class="fu"><a href="https://rvest.tidyverse.org/reference/rename.html" class="external-link">html_nodes</a></span><span class="op">(</span><span class="st">"p"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">rvest</span><span class="fu">::</span><span class="fu"><a href="https://rvest.tidyverse.org/reference/html_text.html" class="external-link">html_text</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">text</span><span class="op">)</span></span>
-<span><span class="co">#&gt;  chr [1:125] "\n\n" ...</span></span>
-<span><span class="va">g</span> <span class="op">&lt;-</span> <span class="va">text</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/extract_graph.html">extract_graph</a></span><span class="op">(</span>sw <span class="op">=</span> <span class="fu"><a href="../reference/gen_stopwords.html">gen_stopwords</a></span><span class="op">(</span><span class="st">"en"</span>, include <span class="op">=</span> <span class="st">"The This It"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co"># looking at the scraped text:</span></span>
+<span><span class="va">text</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="co"># seeing the head of the text</span></span>
+<span><span class="co">#&gt; [1] "\n\n"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     </span></span>
+<span><span class="co">#&gt; [2] "The GNU General Public Licenses (GNU GPL or simply GPL) are a series of widely used free software licenses, or copyleft licenses, that guarantee end users the freedoms to run, study, share, and modify the software.[7] The license was the first copyleft for general use and was originally written by Richard Stallman, the founder of the Free Software Foundation (FSF), for the GNU Project. The license grants the recipients of a computer program the rights of the Free Software Definition.[8] The licenses in the GPL series are all copyleft licenses, which means that any derivative work must be distributed under the same or equivalent license terms. It is more restrictive than the Lesser General Public License and even further distinct from the more widely-used permissive software licenses such as BSD, MIT, and Apache.\n"</span></span></code></pre></div>
+<p>And now extracting the graphs:</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="va">text</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/extract_graph.html">extract_graph</a></span><span class="op">(</span>sw <span class="op">=</span> <span class="fu"><a href="../reference/gen_stopwords.html">gen_stopwords</a></span><span class="op">(</span><span class="st">"en"</span>, include <span class="op">=</span> <span class="st">"The This It"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Tokenizing by sentences</span></span>
 <span><span class="va">g</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3,669 × 2</span></span></span>
@@ -208,7 +228,7 @@ extract the graph.</p>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 3,659 more rows</span></span></span>
 <span><span class="va">g_N</span> <span class="op">&lt;-</span> <span class="va">g</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">n1</span>, <span class="va">n2</span>, sort <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
 <span><span class="va">g_N</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2,409 × 3</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2,412 × 3</span></span></span>
 <span><span class="co">#&gt;    n1           n2              n</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> GPLv3        GPLv2          24</span></span>
@@ -221,27 +241,46 @@ extract the graph.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Artifex      Ghostscript    12</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> However      GPL            12</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> FSF          GPL            11</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 2,399 more rows</span></span></span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 2,402 more rows</span></span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_graph.html">plot_graph</a></span><span class="op">(</span><span class="va">text</span>, <span class="va">g_N</span><span class="op">)</span></span></code></pre></div>
 <p><img src="entities_and_relation_extraction_files/figure-html/ploting%20the%20graph-1.png" width="700"></p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">page</span> <span class="op">&lt;-</span> <span class="st">"https://en.wikipedia.org/wiki/Julia_Silge"</span> <span class="op">|&gt;</span> <span class="fu">rvest</span><span class="fu">::</span><span class="fu"><a href="http://xml2.r-lib.org/reference/read_xml.html" class="external-link">read_html</a></span><span class="op">(</span><span class="op">)</span></span>
+<p>To plot an interactive graph, it is possible to use {networkD3}:</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">g_N</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="co"># to reduce the amount of nodes and edges in the graph</span></span>
+<span>  <span class="fu">networkD3</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/networkD3/man/simpleNetwork.html" class="external-link">simpleNetwork</a></span><span class="op">(</span></span>
+<span>    height <span class="op">=</span> <span class="st">"10px"</span>, width <span class="op">=</span> <span class="st">"30px"</span>,</span>
+<span>    linkDistance <span class="op">=</span> <span class="fl">50</span>,</span>
+<span>    fontSize <span class="op">=</span> <span class="fl">16</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
+<div class="forceNetwork html-widget html-fill-item" id="htmlwidget-ac96cb3ee4656e2e9ec3" style="width:700px;height:432.632880098888px;"></div>
+<script type="application/json" data-for="htmlwidget-ac96cb3ee4656e2e9ec3">{"x":{"links":{"source":[35,8,25,44,30,32,30,8,37,22,30,30,36,24,30,34,35,56,30,30,35,42,10,30,30,25,44,50,55,30,30,30,44,45,47,54,62,7,9,19,30,34,35,38,47,49,58,1,0,11,12,13,18,22,27,30,30,32,34,34,34,34,35,25,25,36,36,36,41,43,45,46,52,57,62,0,3,5,6,8,8,8,10,14,12,15,22,16,19,19,20,28,28,30,30,30,30,30,30,30],"target":[34,36,36,30,22,30,35,25,30,30,34,40,25,30,24,35,30,30,44,55,44,22,22,9,32,8,35,30,30,26,31,50,32,30,30,61,49,34,30,22,19,44,22,30,35,41,33,36,22,30,30,30,30,35,34,21,37,57,29,51,53,59,52,30,39,8,30,39,49,35,32,30,30,32,41,35,61,35,35,30,39,60,42,32,32,30,24,32,30,35,32,24,30,2,4,17,18,23,41,48],"value":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],"colour":["#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666"]},"nodes":{"name":["After","AGPL License","Also","Although the FSF","Ambiguity","Andrew Morton","Apache","Apache License","Artifex","Black Duck Software","Cisco","Copyleft","Debian","Different","DRM-restricted","Eric","Fedora","FLOSS Manuals","FOSS","Free Software Foundation","FreeBSD","Freecode","FSF","German","GFDL","Ghostscript","GNU","GNU Affero General Public License","GNU Free Documentation License","GNU Project","GPL","GPL FAQ","GPL-licensed","GPLv1","GPLv2","GPLv3","Hancom","However","In August","Judge Jacqueline Scott Corley","LGPL","License","Linksys","Linus Torvalds","Linux","Microsoft","Mundie","On","Only","Program","Richard Stallman","Rob Landley","Similarly","Software","Stallman","The FSF","The GPL","These","To","Toybox","US District Court","X11","You"],"group":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],"nodesize":[8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8]},"options":{"NodeID":"name","Group":"group","colourScale":"d3.scaleOrdinal(['#3182bd'])","fontSize":16,"fontFamily":"serif","clickTextSize":40,"linkDistance":50,"linkWidth":"'1.5px'.toString()","charge":-30,"opacity":0.6,"zoom":false,"legend":false,"arrows":false,"nodesize":true,"radiusCalculation":"d.nodesize","bounded":false,"opacityNoHover":1,"clickAction":null}},"evals":[],"jsHooks":[]}</script><p>Another text example.
+<!-- "https://en.wikipedia.org/wiki/Julia_Silge" --></p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">page</span> <span class="op">&lt;-</span> <span class="st">"https://en.wikipedia.org/wiki/Hurricane_Milton"</span> <span class="op">|&gt;</span> <span class="fu">rvest</span><span class="fu">::</span><span class="fu"><a href="http://xml2.r-lib.org/reference/read_xml.html" class="external-link">read_html</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">text</span> <span class="op">&lt;-</span> <span class="va">page</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">rvest</span><span class="fu">::</span><span class="fu"><a href="https://rvest.tidyverse.org/reference/rename.html" class="external-link">html_nodes</a></span><span class="op">(</span><span class="st">"p"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">rvest</span><span class="fu">::</span><span class="fu"><a href="https://rvest.tidyverse.org/reference/html_text.html" class="external-link">html_text</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">text</span></span>
-<span><span class="co">#&gt; [1] "\n"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         </span></span>
-<span><span class="co">#&gt; [2] "Julia Silge (born June 10, 1978) is an American data scientist and software engineer. She has developed tools for statistical modelling in the R programming language,[1][2] including the text mining package tidytext.[3] Silge currently works for Posit PBC, formerly known as RStudio PBC.[1]"                                                                                                                                                                                                                         </span></span>
-<span><span class="co">#&gt; [3] "Silge studied physics at Texas A&amp;M University, graduating in 2000. She obtained her M.A. (2002) and PhD (2005) in astronomy from the University of Texas at Austin.[2][4] She was an adjunct professor at University of New Haven and Quinnipiac University from 2006 to 2008.[citation needed]"                                                                                                                                                                                                                            </span></span>
-<span><span class="co">#&gt; [4] "Silge has worked as a data scientist for several companies, most recently Stack Overflow and Posit PBC.[1][2] At Stack Overflow, she researched the popularity of different programming languages[5] and skills for technologists.[6] She also began working on tidytext, an R package for text mining, with colleague David Robinson. Their book Text Mining with R: A Tidy Approach (2017) drew on examples of text analysis ranging from Jane Austen novels,[7] popular songs,[8]NASA metadata, and Twitter archives.[9]"</span></span>
-<span><span class="co">#&gt; [5] "In February 2017, Silge made the news when she used a note attached to a pizza delivery to contact her senator Orrin Hatch to object to the nomination of Betsy DeVos as Secretary of Education, after failing to reach Hatch by phone.[10][11]"</span></span>
+<span><span class="va">text</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="co"># seeing the head of the tex</span></span>
+<span><span class="co">#&gt; [1] "\n"   "\n\n"</span></span>
 <span><span class="va">g</span> <span class="op">&lt;-</span> <span class="va">text</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/extract_graph.html">extract_graph</a></span><span class="op">(</span>sw <span class="op">=</span> <span class="fu"><a href="../reference/gen_stopwords.html">gen_stopwords</a></span><span class="op">(</span><span class="st">"en"</span>, include <span class="op">=</span> <span class="st">"The This It"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Tokenizing by sentences</span></span>
 <span><span class="va">g_N</span> <span class="op">&lt;-</span> <span class="va">g</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">n1</span>, <span class="va">n2</span>, sort <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="../reference/plot_graph.html">plot_graph</a></span><span class="op">(</span><span class="va">text</span>, <span class="va">g_N</span><span class="op">)</span></span></code></pre></div>
-<p><img src="entities_and_relation_extraction_files/figure-html/ex2%20wiki%20Silge-1.png" width="700"></p>
+<span><span class="fu"><a href="../reference/plot_graph.html">plot_graph</a></span><span class="op">(</span><span class="va">text</span>, <span class="va">g_N</span>, head_n <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></span></code></pre></div>
+<p><img src="entities_and_relation_extraction_files/figure-html/ex2%20wiki%20Hurricane-1.png" width="700">
+To plot an interactive graph, it is possible to use {networkD3}:</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">g_N</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="co"># to reduce the amount of nodes and edges in the graph</span></span>
+<span>  <span class="fu">networkD3</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/networkD3/man/simpleNetwork.html" class="external-link">simpleNetwork</a></span><span class="op">(</span></span>
+<span>    height <span class="op">=</span> <span class="st">"10px"</span>, width <span class="op">=</span> <span class="st">"30px"</span>,</span>
+<span>    linkDistance <span class="op">=</span> <span class="fl">50</span>,</span>
+<span>    fontSize <span class="op">=</span> <span class="fl">16</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
+<div class="forceNetwork html-widget html-fill-item" id="htmlwidget-e5c8c404fe174e4c81bd" style="width:700px;height:432.632880098888px;"></div>
+<script type="application/json" data-for="htmlwidget-e5c8c404fe174e4c81bd">{"x":{"links":{"source":[35,38,18,18,35,38,23,35,38,53,35,18,18,35,18,35,38,38,38,53,7,18,23,24,35,38,4,31,34,35,35,38,38,38,38,46,53,53,53,1,8,11,12,23,24,26,28,30,30,38,38,38,38,38,38,52,0,1,2,11,11,14,17,18,18,18,19,20,21,22,28,29,33,35,35,37,38,38,38,39,40,41,42,43,44,47,48,50,51,1,3,5,6,7,7,9,10,11,13,17],"target":[38,35,38,35,18,18,38,53,23,38,23,23,53,7,45,54,7,44,53,35,18,7,18,38,57,45,38,38,38,25,45,16,39,54,57,38,7,54,57,38,38,35,18,35,0,35,18,18,38,24,25,32,36,49,55,18,38,35,38,18,38,38,18,25,54,57,35,38,38,38,35,35,38,27,36,35,0,15,56,38,38,38,38,38,38,38,38,38,38,18,38,53,18,25,35,38,38,25,38,11],"value":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],"colour":["#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666","#666"]},"nodes":{"name":["Abaco","After","All Allegiant Air","All University of Central Florida","Amtrak","As","At","Atlantic","Auto Train","Bahamasair","Bahamian","Bay of Campeche","Big Bend","Bimini","Bradenton International Airport","Brightline","Busch Gardens Tampa Bay","Caribbean Sea","Category","Celestún","Central","Clearwater International Airport","Extreme Northwest Bahamian Islands","Florida","Grand Bahama","Gulf of Mexico","Heavy","Hurricane Felix","Hurricane Helene","Hurricane Hunters","Hurricane Milton","Jacksonville","Legoland Florida","Many","Miami","Milton","National Hurricane Center","NHC","October","Orlando","Orlando International Airport","Palm Beach International Airport","Pete","Sarasota","Several","Siesta Key","Silver Service","Southwest Florida","St","Starting","Tampa International Airport","Thousands","U.S","UTC","UTC October","Walt Disney World","West Palm Beach","Wilma"],"group":[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],"nodesize":[8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8]},"options":{"NodeID":"name","Group":"group","colourScale":"d3.scaleOrdinal(['#3182bd'])","fontSize":16,"fontFamily":"serif","clickTextSize":40,"linkDistance":50,"linkWidth":"'1.5px'.toString()","charge":-30,"opacity":0.6,"zoom":false,"legend":false,"arrows":false,"nodesize":true,"radiusCalculation":"d.nodesize","bounded":false,"opacityNoHover":1,"clickAction":null}},"evals":[],"jsHooks":[]}</script>
 </div>
   </div>
 

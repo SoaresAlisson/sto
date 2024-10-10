@@ -1,15 +1,17 @@
 #' show all stopwords categories of a language
 #'
+#' @param lang language, like "en", "pt"
+#' @return an list object of stopwords
 #' @export
 #'
 #' @examples
-#' read_sw_yml("pt")
-#' read_sw_yml("en")
-read_sw_yml <- function(lang) {
+#' show_sw("pt")
+#' show_sw("en")
+show_sw <- function(lang, as_vector = FALSE) {
   # lang = "pt"
   file_name <- paste0("stopwords_", lang, ".yml") |> tolower()
   yaml_file_path <- system.file("stopwords", file_name, package = "sto")
-  
+
   if (!yaml_file_path |> file.exists()) {
     paste0(
       'Error in "', lang,
@@ -17,8 +19,19 @@ read_sw_yml <- function(lang) {
     ) |>
       stop()
   }
-  
-   yaml_file_path |> yaml::read_yaml() |> sto::ls2v() 
+
+  list_sw <- yaml_file_path |>
+    yaml::read_yaml() |>
+    ls2v()
+  if (as_vector) {
+    sw <- list_sw |>
+      unlist() |>
+      unique() |>
+      sort()
+  } else {
+    sw <- list_sw
+  }
+  return(sw)
 }
 
 

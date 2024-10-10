@@ -74,15 +74,15 @@ extract_entity <- function(text, connect = connectors("misc"), sw = "the") {
 #' @examples
 #' texto_teste <- "José da Silva e Fulano de Tal foram, bla Maria Silva. E depois disso, bla Joaquim José da Silva Xavier no STF"
 #' ppn <- texto_teste |> extract_entity(connectors("pt"), sw = gen_stopwords("pt"))
-#' texto_teste |> subs_entity(ppn)
-#' texto_teste |> subs_entity(ppn, method = "loop")
-#' text <- texto_teste |> subs_entity(ppn)
-#' text
+#' texto_teste |> subs_ppn(ppn)
+#' texto_teste |> subs_ppn(ppn, method = "loop")
+#' text <- texto_teste |> subs_ppn(ppn)
+#' texd
 # text |>
 #   strsplit(" ") |>
 #   unlist() |>
 #   count_vec()
-subs_entity <- function(text, entities, method = "normal") {
+subs_ppn <- function(text, entities, method = "normal") {
   # entities <- texto_teste |> extract_entity(connectors("pt"), sw = gen_stopwords("pt"))
   entities <- entities |> unlist()
 
@@ -114,6 +114,9 @@ subs_entity <- function(text, entities, method = "normal") {
 }
 # "asdc,casd_asd. Asc" |> stringr::str_extract_all("\\W+")
 # c("as as", "Joaquim cas", "as_cas", "asdcasdc") |> sto::grep2("\\W")
+
+
+
 
 #' tokenize and selects only sentences/paragraphs with more than one entity per sentence or paragraph
 #' @param text an input text

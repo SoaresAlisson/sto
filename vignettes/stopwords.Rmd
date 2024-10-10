@@ -73,5 +73,12 @@ my_sw$V$ser
 gen_stopwords("pt", "V", vec = "list")$V$ser
 ```
 
+To see all the categories and its respective terms, run the following code 
+```{r show_sw}
+show_sw("en")
+show_sw("en", as_vector = TRUE)
+show_sw("pt", as_vector = TRUE)
+```
+
 
 
