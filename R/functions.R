@@ -250,3 +250,21 @@ s_extract_all <- function(txt, pattern, IC = TRUE, unl = FALSE) {
 nothing <- function(input) {
   return(input) 
 }
+
+#` TODO
+#' funcao para apagar o vetor de texto a partir do início de certo padrão de txt 
+#' @param to_end If TRUE, erases from criteria to the end of text. if FALSE, erases from the begin to the criteria
+strip_txt <- function(txt, criteria, to_end = TRUE) { 
+  txt2 <- unlist(txt)
+  index <- txt2 |> unlist() |> grepl2(criteria) |> which()
+
+  if(length(index)==0){
+    NA
+  } else{
+      if(to_end == T){
+        txt2[1:index-1] # retorna do inicio do txt até padrão
+    } else{
+      txt2[index:length(txt2)] # retorna do padrão ao fim
+  }
+  }
+}

@@ -21,7 +21,7 @@ devtools::install()
 usethis::use_package("pacote")
 ```
 
-```{r}
+```{r usethis vignette}
 # usethis::use_vignette("First_steps")
 # usethis::use_vignette("stopwords")
 # Create an article that only appears on the website with
@@ -127,6 +127,15 @@ ent_test <- texto_teste |>
 # extract_entity()
 subs_entity(texto_teste, ent_test)
 ```
+## f 
+usar r"()" em f para utilizar menos caracteres
+```{r}
+f  <- function(x){
+x |> r"()"
+}
+f"testando {bla bla }"
+```
+
 
 
 

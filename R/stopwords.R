@@ -1,13 +1,15 @@
 #' show all stopwords categories of a language
 #'
 #' @param lang language, like "en", "pt"
+#' @param add include additional words to the stop words list
 #' @return an list object of stopwords
 #' @export
 #'
 #' @examples
 #' show_sw("pt")
 #' show_sw("en")
-show_sw <- function(lang, as_vector = FALSE) {
+#' show_sw("en", as_vector=T, add = "Joe Zap")
+show_sw <- function(lang, as_vector = FALSE, add = NULL) {
   # lang = "pt"
   file_name <- paste0("stopwords_", lang, ".yml") |> tolower()
   yaml_file_path <- system.file("stopwords", file_name, package = "sto")
@@ -23,6 +25,9 @@ show_sw <- function(lang, as_vector = FALSE) {
   list_sw <- yaml_file_path |>
     yaml::read_yaml() |>
     ls2v()
+
+  list_sw[["added"]] <- s2v(add) 
+
   if (as_vector) {
     sw <- list_sw |>
       unlist() |>
@@ -51,7 +56,7 @@ show_sw <- function(lang, as_vector = FALSE) {
 #' gen_stopwords(lang = "pt", categories = "V", vec = "list")
 #' gen_stopwords(lang = "pt", categories = "V", vec = "n_vec")
 #' gen_stopwords(lang = "pt", categories = "V", vec = "vec")
-gen_stopwords <- function(lang = "pt", categories = "IN CC CD", vec = "vec", include = "") {
+gen_stopwords <- function(lang = "pt", categories = "IN CC CD", vec = "vec", add = NULL) {
   # lang = "PT"
 
   # folder <- devtools::package_file("data/stopwords/")
@@ -79,7 +84,7 @@ gen_stopwords <- function(lang = "pt", categories = "IN CC CD", vec = "vec", inc
   # lapply(lapply(s2v)
   # list_sw[7] |> lapply(s2v)
 
-  list_sw[["included"]] <- s2v(include) #|> stringr::str_to_title()
+  list_sw[["added"]] <- s2v(add) #|> stringr::str_to_title()
 
   categ_vec <- categories |>
     toupper() |>

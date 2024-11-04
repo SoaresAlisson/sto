@@ -237,7 +237,7 @@ plot_graph <- function(text, df, head_n = 30, color = "lightblue") {
       # c("lightblue", "blue", "royalblue")[1],
       end_cap = ggraph::circle(6, "mm")
     ) + # afastamento do nó
-    ggraph::geom_node_text(ggplot2::aes(label = name, size = freq), repel = TRUE) +
+    ggraph::geom_node_text(ggplot2::aes(label = name, size = freq), repel = TRUE) + # TODO ajustar tamanho minimo e máximo
     # ggraph::geom_node_label(ggplot2::aes(label = name), repel=TRUE,  point.padding = unit(0.2, "lines")) +
     ggplot2::theme_void() +
     ggplot2::theme(legend.position = "none")
