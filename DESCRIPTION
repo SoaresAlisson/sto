@@ -1,9 +1,13 @@
 Package: sto
 Type: Package
-Title: What the Package Does (Title Case)
+Title: operation with strings 
 Version: 0.1.0
-Author: Alisson Soares <alissonmsoares@gmail.com>
-Maintainer: Alisson Soares <alissonmsoares@gmail.com>
+Authors@R: 
+    person("Alisson", "Soares", 
+    email="soares.alisson@yahoo.com.br", 
+    role = c("aut", "cre"), 
+    comment = c(ORCID = "0009-0004-5497-5572" ) )
+Maintainer: Alisson Soares <soares.alisson@yahoo.com.br>
 Description: some facilities for string manipulation.
     from easily loading libraries from a char object, to easily pipe grep, grepl 
     and gsub with native R pipe, easily transforming char into vector.

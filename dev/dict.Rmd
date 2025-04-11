@@ -1,0 +1,107 @@
+ Os dicionários disponíveis destinam-se a uso por correctores ortográficos ou analisadores morfológicos. São produzidos num ambiente Linux/Unix, contudo podem ser suportados também por outros sistemas operativos (Windows/Mac OS X). São periodicamente actualizados. Os dicionários estão cobertos pelas licenças GPL, LGPL, e MPL (ou pela menos uma delas).
+
+Para todos os correctores ortográficos disponíveis, disponibilizamos versões pré-acordo ortográfico de 1990 e pós-acordo ortográfico. A versão por omissão é, neste momento, a pós-acordo ortográfico. 
+https://pt.libreoffice.org/descarregar/dicionarios/
+https://natura.di.uminho.pt/wiki/doku.php?id=dicionarios:main
+
+https://natura.di.uminho.pt/download/sources/Dictionaries/hunspell/
+O HunSpell (Hungarian spell) é uma evolução do myspell, sendo também um analisador morfológico, com um conjunto de novas funcionalidades em relação ao Myspell. É usado desde a versão 2.0.3 do OpenOffice como componente para a correcção ortográfica.
+
+Um dicionário no formato myspell é compatível com os correctores baseados no hunspell.
+
+Algumas características (versão 2.1.8 do hunspell)
+    Suporta parcialmente palavras compostas, e conjugações pronominais, embora necessite de ser revisto e testado!
+    Contém informação morfológica, embora a sua aplicação esteja limitada;
+    Tem um melhor mecanismo de substituição de segmentos de palavras;
+    Suporte de UTF-8;
+https://natura.di.uminho.pt/download/sources/Dictionaries/hunspell/hunspell-pt_PT-preao-20220621.tar.gz
+
+TODO: pegar arquivos do site a partir da língua
+
+```{r list files de hunspel}
+arqs <- list.files("../hunspell/", full.names=T)
+# arqs  |> grep("dic$",x = _, value = T)  |> readLines(n=30L,skip=2L ) #|> gsub("(.*)\\[")
+# arqs  |> grep("dic$",x = _, value = T)  |> readLines(n=30L,skip=2L ) |> tail(-1) |> read.csv(text=_, sep = "\t") 
+# arqs |> grep("dic$",x = _, value = T) |> read.csv(sep= "\t", header = T, skip = 1L)
+# dict_pt <- 
+  arqs  |> grep("dic$",x = _, value = T)  |> 
+  # readLines(n=90L,skip=2L ) |> 
+  readLines(skip=2L ) |> 
+  head(30) |>
+  grep2("\\t") |>
+  gsub(r"((.*)(\t.*))", "\\1", x=_) |> 
+  gsub( r"((.*)(\/.*))", "\\1",x = _) |> 
+  grep2("[:alpha:]") #|> head(10)
+
+dict_pt |> grep2("foss") 
+```
+```{r fun build_dict}
+#' read a file .dic from Hunspell and get only the words to build a dict in the language
+#' @args arqs the name of one file
+#' \dontrun{
+#' grep("dic$",x = arqs, value = T)  |> build_dict()  |> head(5)
+#' }
+build_dict <- function(arqs) {
+ arqs |>
+    # grep("dic$",x = _, value = T)  |> 
+    # grep("dic$",x = _, value = T)  |> 
+    # readLines(n=90L,skip=2L ) |> 
+    readLines() |> 
+    grep2("\\t") |>
+    gsub(r"((.*)(\t.*))", "\\1", x=_) |> 
+    gsub( r"((.*)(\/.*))", "\\1",x = _) |>
+    grep2("[:alpha:]") 
+}
+
+grep("dic$",x = arqs, value = T)  |> 
+  build_dict()  |> head(5)
+```
+
+TODO: ver como salvar o arquivo para o pacote utilizar posteriormente. Uma função terá parametro para sobrescrever.
+In R, building my own package, some data will be downloaded from the web, do some data wrangling and saved it to posterior use.
+The next time, the user will not need to download the data, but just use. What is the best way to do the data storage.
+https://chat.deepseek.com/a/chat/s/a40669cc-21e1-4a3a-84fb-7c8abfde04eb
+
+```{r }
+get_data_cache <- function() {
+  cache_dir <- tools::R_user_dir("sto", which = "cache")
+  if (!dir.exists(cache_dir)) {
+    dir.create(cache_dir, recursive = TRUE)
+  }
+  return(cache_dir)
+}
+
+save_cache <- function(data, filename) {
+  cache_file <- file.path(get_data_cache(), filename)
+  saveRDS(data, file = cache_file)
+}
+
+load_cache <- function(filename) {
+  cache_file <- file.path(get_data_cache(), filename)
+  if (file.exists(cache_file)) {
+    readRDS(cache_file)
+  } else {
+    NULL
+  }
+}
+```
+```{r ex usage}
+get_data <- function() {
+  # Try to load cached data first
+  cached_data <- load_cache("my_dataset.rds")
+  
+  if (!is.null(cached_data)) {
+    message("Using cached data")
+    return(cached_data)
+  }
+  
+  message("Downloading fresh data...")
+  # Download and process data
+  fresh_data <- download_data() |> process_data()
+  
+  # Save to cache
+  save_cache(fresh_data, "my_dataset.rds")
+  
+  return(fresh_data)
+}
+```

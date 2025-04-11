@@ -2,12 +2,12 @@
 % Please edit documentation in R/functions.R
 \name{count_vec}
 \alias{count_vec}
-\title{count a vector of elements, arragange it or not, and returns a tibble}
+\title{count a vector of elements}
 \usage{
 count_vec(vec, sort_n = TRUE)
 }
 \description{
-count a vector of elements, arragange it or not, and returns a tibble
+count a vector of elements, arrange it or not in frequency order, and returns a tibble
 }
 \examples{
 vec <- s2v("a a b c a b a z z z c d e")

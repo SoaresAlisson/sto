@@ -8,7 +8,6 @@ available::available("sto")
 ```
 ```{r usethis::use_readme_rm}
 usethis::use_readme_rmd()
-usethis::use_readme_rmd()
 ```
 ```{r devtools doc build install}
 devtools::document()
@@ -37,6 +36,10 @@ usethis::pr_push() # empurra
 ```{r build_site_github_pages}
 # Criando página internet com references e articles
 pkgdown::build_site_github_pages()
+devtools::build_manual() # Create package pdf manual
+
+## funcoes e código
+
 ```
 ```{r extract_ppn }
 extract_ppn <- function(string) {
@@ -134,6 +137,49 @@ f  <- function(x){
 x |> r"()"
 }
 f"testando {bla bla }"
+```
+## stopwords faltantes
+```{r}
+sw <- stopwords::stopwords(language = "en", source = "snowball", simplify = TRUE)
+
+sw[!sw %in% show_sw("en", as_vector = TRUE)]
+```
+```{r}
+sw <- stopwords::stopwords(language = "pt", source = "snowball", simplify = TRUE)
+
+sw[!sw %in% show_sw("pt", as_vector = TRUE)]
+```
+
+## v 
+```{r}
+with(sto::s2v )
+```
+
+```{r}
+with(, sto::s2v())
+```
+
+
+## compare strings
+
+```{r fun diff_string}
+string1 <- "blabla"
+string2 <- "blable"
+
+diff_string <- function(string1, string2) {
+  Reduce(setdiff, strsplit(c(string1, string2), split = ""))
+  # setdiff(strsplit(c(string1, string2), split = ""))
+}
+
+diff_string("blabla", "blable")
+diff_string("blabla", "bla ble") 
+
+List <- strsplit(c(string1, string2), split = "")
+List[[1]](List[[1]] == List[[2]])
+
+Filter(fun (List[[1]] == List[[2]) ]
+)
+
 ```
 
 

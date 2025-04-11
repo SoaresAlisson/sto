@@ -8,8 +8,9 @@
 #' @examples
 #' show_sw("pt")
 #' show_sw("en")
-#' show_sw("en", as_vector=T, add = "Joe Zap")
-show_sw <- function(lang, as_vector = FALSE, add = NULL) {
+#' # as vector and adding some more stopwords
+#' show_sw("en", T, "Abul Zoe")
+show_sw <- function(lang, as_vector = FALSE, add = "") {
   # lang = "pt"
   file_name <- paste0("stopwords_", lang, ".yml") |> tolower()
   yaml_file_path <- system.file("stopwords", file_name, package = "sto")
@@ -17,7 +18,7 @@ show_sw <- function(lang, as_vector = FALSE, add = NULL) {
   if (!yaml_file_path |> file.exists()) {
     paste0(
       'Error in "', lang,
-      '": language not found. Please specify a valid language'
+      '": language not found. Please specify a valid language, or consider contributing to this project with a new stopwords language'
     ) |>
       stop()
   }

@@ -1,0 +1,18 @@
+
+raw text
+
+```{r raw}
+f <- function(text) {
+    text |> 
+    
+ }
+  
+f""
+
+r"()"
+
+
+
+```
+
+

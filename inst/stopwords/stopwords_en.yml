@@ -1,11 +1,12 @@
 # English stopwords:
 # https://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html)
 # IN 	preposition, subordinating conjunction
+# stopwords::stopwords(language = "en", source = "snowball", simplify = TRUE)
 IN: of for in by
 # DT 	determiner
 DT: a the this
 # CC 	coordinating conjunction
-CC: and but or for but yet so
+CC: and but or for yet so
 #CD 	cardinal number
 CD: zero one two three four five first second third fourth fifth sixth seventh eighth ninth tenth
 #JJ	adjective
@@ -19,7 +20,7 @@ JJS: bluest happiest
 MD: could will
 # PP	personal pronoun
 PP: I you he she it we
-PRP: I you he she we
+PRP: I you he she we us they
 #	PRP$ 	Possessive pronoun
 PPZ: your my mine ours his her
 # RB: adverb
@@ -29,15 +30,19 @@ RBR: better
 # RBS	adverb, superlative	best
 # RBS:	best
 # UH	interjection	aha
-UH: aha
+UH: aha uhu
 #RP 	particle
 RP: up off
 # V verb
 V: am are is be can could did do have he is it may might must need no not now of on or she that the to was were
-question: what when where who whom why because
+question: what when where who whom why how would could
+conclusion: because therefore furthermore so
+time:
+  month: January February March April May June July August September October November December
+  time: today tomorrow yesterday now later sooner during after before meanwhile
 # WDT	wh-determiner	which, who
 # WP	wh-pronoun	who, what
 # WP$	possessive wh-pronoun	whose
 # WRB	wh-abverb	where, when
 PT: Mr. Mrs. Miss Ms. Sir Madam Dr. Prof.
-non-classified-yet: if at
+non-classified-yet: if at as like there these all some most many more few such let even according with since our put over you've we've they'd i'd you'd he'd she'd we'd they'dfmyself ourselves yours yourself yourselves him himself

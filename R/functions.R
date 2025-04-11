@@ -1,6 +1,7 @@
 # Functions
 
 #' To easily paste and collapse chars objects into one string.
+#' @description
 #' A wrapper for glue::glue.
 #' @export
 #'
@@ -36,6 +37,7 @@ gsub2 <- function(x, arg1, arg2 = "", ic = FALSE, ...) {
 
 #' A grep to be used with native pipe '|>'.
 #'
+#' @description
 #' grep2 is a wraper around the traditional grep, that works with native pipe,
 #' returns value and are ignore case as default
 #' @param x data to search
@@ -67,6 +69,7 @@ grepl2 <- function(x, arg1, ic = TRUE, ...) {
 
 #' Convert a string into a vector of elements.
 #'
+#' @description
 #' Easily transform a character string into a vector of elements.
 #' @param char character to be transformed
 #' @param sep separator
@@ -107,6 +110,7 @@ s2v <- function(char, sep = " |\\n|\\t|\\r", wss = "_", print = FALSE) {
 
 #' list of strings to list of vectors.
 #'
+#' @description
 #' string to vec from list of nested elements of text
 ls2v <- function(char, sep = " |\\n|\\t|\\r", wss = "_") {
   # apply_strsplit_recursive <- function(x, split = " |\\n|\\t|\\r", wss = "_") {
@@ -134,6 +138,7 @@ ls2v <- function(char, sep = " |\\n|\\t|\\r", wss = "_") {
 
 #' load libraries from string
 #'
+#' @description
 #' load packages from a char separated by space or commas
 #' @param char character with package named
 #' @param print if TRUE, will return a string that can be pasted in the console
@@ -165,7 +170,9 @@ sapply(packages, \(lib) f("library({lib})"))  |>
 
 #' Install libraries from string.
 #'
+#' @description
 #' Given a char with package names, separated by spaces and/or commas, install all the packages
+#'
 #' @param char string with package names
 #' @param installer choose which installer to be used: "install.package" (default), "pak", "dev_git" for devtools::install_github
 #' @param ... Additional parameters
@@ -192,7 +199,11 @@ shuffle_time <- function(min_time, max_time) {
 }
 
 
-#' count a vector of elements, arragange it or not, and returns a tibble
+#' count a vector of elements
+#'
+#' @description
+#' count a vector of elements, arrange it or not in frequency order, and returns a tibble
+#'
 #' @export
 #' @examples
 #' vec <- s2v("a a b c a b a z z z c d e")
@@ -209,6 +220,7 @@ count_vec <- function(vec, sort_n = TRUE) {
 
 #' extract all chars.
 #'
+#' @description
 #' Inspired by stringr::str_extract_all(), but with ignore case option.
 #' @export
 #' @examples
@@ -229,10 +241,11 @@ s_extract_all <- function(txt, pattern, IC = TRUE, unl = FALSE) {
   }
 }
 
-# para erros na requisisção, ver tribunaisTrabalho TODO2
+# para erros na requisição, ver tribunaisTrabalho TODO2
 
 #' An empty function.
 #'
+#' @description
 #' An empty function that does nothing, just returns the input. It is useful when developing and testing pipes, placed in the end of pipes, so the developer can comment and uncomment lines of pipes easily, instead of adding or deleting the last coma or pipe in the last line.
 #' @export
 #'

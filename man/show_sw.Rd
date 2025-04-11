@@ -4,10 +4,12 @@
 \alias{show_sw}
 \title{show all stopwords categories of a language}
 \usage{
-show_sw(lang, as_vector = FALSE)
+show_sw(lang, as_vector = FALSE, add = "")
 }
 \arguments{
 \item{lang}{language, like "en", "pt"}
+
+\item{add}{include additional words to the stop words list}
 }
 \value{
 an list object of stopwords
@@ -18,4 +20,6 @@ show all stopwords categories of a language
 \examples{
 show_sw("pt")
 show_sw("en")
+# as vector and adding some more stopwords
+show_sw("en", T, "Abul Zoe")
 }

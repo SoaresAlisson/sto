@@ -66,7 +66,7 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">show_sw</span><span class="op">(</span><span class="va">lang</span>, as_vector <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">show_sw</span><span class="op">(</span><span class="va">lang</span>, as_vector <span class="op">=</span> <span class="cn">FALSE</span>, add <span class="op">=</span> <span class="st">""</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -75,6 +75,10 @@
 
 <dl><dt id="arg-lang">lang<a class="anchor" aria-label="anchor" href="#arg-lang"></a></dt>
 <dd><p>language, like "en", "pt"</p></dd>
+
+
+<dt id="arg-add">add<a class="anchor" aria-label="anchor" href="#arg-add"></a></dt>
+<dd><p>include additional words to the stop words list</p></dd>
 
 </dl></div>
     <div id="value">
@@ -114,7 +118,19 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> [22] "por"     "porra"   "meo"     "bosta"   "merda"   "cocô"   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $demonstrativo</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "este"   "esse"   "aquele" "isto"   "isso"  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "este"     "esta"     "estes"    "estas"    "neste"    "nesta"   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "nestes"   "nestas"   "esse"     "essa"     "esses"    "essas"   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [13] "nesse"    "nesses"   "nessa"    "nessas"   "aquele"   "aquela"  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [19] "aqueles"  "aquelas"  "naquele"  "naquela"  "naqueles" "naquelas"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [25] "isto"     "nisto"    "isso"     "nisso"   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $num</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "um"        "uma"       "dois"      "duas"      "tres"      "três"     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "quatro"    "cinco"     "seis"      "sete"      "oito"      "nove"     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [13] "dez"       "onze"      "doze"      "treze"     "quatorze"  "quinze"   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [19] "dezesseis" "dezessete" "dezoito"   "dezenove"  "vinte"     "trinta"   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [25] "quarenta"  "cinquenta" "sessenta"  "setenta"   "oitenta"   "noventa"  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [31] "cem"       "duzentos"  "trezentos"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $CD</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "primeiro"         "segundo"          "terceiro"         "quarto"          </span>
@@ -177,6 +193,20 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> [25] "haverá"    "haveremos" "havereis"  "haverão"   "haja"      "hajam"    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [31] "houvera"   "houveram"  "houvesse" </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $V$ir</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "ir"    "vou"   "vai"   "vais"  "vamos" "fui"   "foi"   "fomos"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $`non-classified-yet`</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "não"      "enquanto" "vamos"    "mesmo"    "agora"    "ambos"   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "também"   "aqui"     "algum"    "alguma"   "alguns"   "algumas" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [13] "sobre"    "passo"    "use"      "diante"   "ao"       "à"       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [19] "quem"     "qual"     "quando"   "desde"    "hoje"     "entenda" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [25] "embora"   "cabe"     "todos"    "essas"    "clique"   "entre"   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [31] "após"     "além"     "veja"     "mais"    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $added</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> character(0)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span><span class="fu">show_sw</span><span class="op">(</span><span class="st">"en"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $IN</span>
@@ -209,7 +239,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "I"   "you" "he"  "she" "it"  "we" </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $PRP</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "I"   "you" "he"  "she" "we" </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "I"    "you"  "he"   "she"  "we"   "us"   "they"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $PPZ</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "your" "my"   "mine" "ours" "his"  "her" </span>
@@ -221,7 +251,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "better"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $UH</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "aha"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "aha" "uhu"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $RP</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "up"  "off"</span>
@@ -234,10 +264,37 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $question</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "what"    "when"    "where"   "who"     "whom"    "why"     "because"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [8] "how"    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $PT</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Mr."   "Mrs."  "Miss"  "Ms."   "Sir"   "Madam" "Dr."   "Prof."</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $`non-classified-yet`</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "if"   "at"   "as"   "like"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $added</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> character(0)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-in"><span><span class="co"># as vector and adding some more stopwords</span></span></span>
+<span class="r-in"><span><span class="fu">show_sw</span><span class="op">(</span><span class="st">"en"</span>, <span class="cn">T</span>, <span class="st">"Abul Zoe"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [1] "Abul"      "Dr."       "I"         "Madam"     "Miss"      "Mr."      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [7] "Mrs."      "Ms."       "Prof."     "Sir"       "Zoe"       "a"        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [13] "aha"       "am"        "and"       "are"       "as"        "at"       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [19] "be"        "because"   "better"    "blue"      "bluer"     "bluest"   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [25] "but"       "by"        "can"       "could"     "did"       "do"       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [31] "eighth"    "fifth"     "first"     "five"      "for"       "four"     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [37] "fourth"    "good"      "happier"   "happiest"  "happy"     "have"     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [43] "he"        "her"       "here"      "his"       "how"       "however"  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [49] "if"        "in"        "is"        "it"        "like"      "may"      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [55] "might"     "mine"      "must"      "my"        "naturally" "need"     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [61] "ninth"     "no"        "not"       "now"       "of"        "off"      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [67] "on"        "one"       "or"        "ours"      "sad"       "second"   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [73] "seventh"   "she"       "sixth"     "so"        "tenth"     "that"     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [79] "the"       "they"      "third"     "this"      "three"     "to"       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [85] "two"       "uhu"       "up"        "us"        "usually"   "was"      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [91] "we"        "were"      "what"      "when"      "where"     "who"      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [97] "whom"      "why"       "will"      "yet"       "you"       "your"     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [103] "zero"     </span>
 </code></pre></div>
     </div>
   </div>
@@ -252,7 +309,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
       </footer></div>
