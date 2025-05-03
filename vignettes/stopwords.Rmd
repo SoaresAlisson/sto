@@ -32,15 +32,15 @@ The
 `lang` parameter uses the two word designation, and the 
 `cat` designs the grammar category following Penn Treebank. See [here](https://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html)
 
-| POS Tag |	Description |	Example | Description |
-|-----|-----|-----|----|
-| CC  |coordinating conjunction|and||
-| CD  |cardinal number |	one, third ||
-| DT  |determiner |	the ||
-| EX  |existential | there 	there is ||
-| PP  | pronoum | me, you, he, she, it, we, they ||
-| PPZ | pronoum|||
-| UH  | interjection | oops! ||
+| POS Tag | Description | Example | Description |
+|---------|-------------|---------|-------------|
+| CC  |coordinating conjunction|and| |
+| CD  |cardinal number |	one, third | |
+| DT  |determiner | the | |
+| EX  |existential | there 	there is | |
+| PP  | pronoum | me, you, he, she, it, we, they | |
+| PPZ | pronoum | | |
+| UH  | interjection | oops! | |
 |  V  | verb | are be have |variations of verbs to be, have, |
 
 ```{r gen_stopwords}
@@ -64,14 +64,23 @@ gen_stopwords(lang = "pt", categories = "V", vec = "n_vec")
 ```
 
 
-
 To use only certain kinds of verbs, like only the variations/conjugations of the Portuguese verb `ser`:
+
 ```{r verb$ser}
 my_sw <- gen_stopwords("pt", "V", vec = "list")
 my_sw$V$ser
 # or shorter
 gen_stopwords("pt", "V", vec = "list")$V$ser
 ```
+
+It is possible to add new words to the stopwords in two ways:
+
+```{r add}
+gen_stopwords("en", "CC", add = c("word1", "word2"))
+gen_stopwords("en", "CC", add = s2v("word1 word2 word3"))
+```
+
+
 
 To see all the categories and its respective terms, run the following code 
 ```{r show_sw}

@@ -1,7 +1,7 @@
 let SessionLoad = 1
 let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-1 siso=-1
 let v:this_session=expand("<sfile>:p")
-let R_Nvim_status =  3 
+let R_Nvim_status =  7 
 silent only
 silent tabonly
 cd ~/Documentos/Programação/R/sto
@@ -14,15 +14,19 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +6 ~/Documentos/Programação/R/sto/R/dicio_pt.R
-badd +10 ~/Documentos/Programação/R/sto/R/stopwords.R
-badd +11 ~/Documentos/Programação/R/sto/vignettes/stopwords.Rmd
-badd +4 ~/Documentos/Programação/R/sto/inst/stopwords/stopwords_en.yml
+badd +34 ~/Documentos/Programação/R/sto/R/stopwords.R
+badd +18 ~/Documentos/Programação/R/sto/inst/stopwords/stopwords_en.yml
 badd +9 ~/Documentos/Programação/R/sto/inst/stopwords/stopwords_pt.yml
-badd +60 R/entity_link.R
+badd +47 R/entity_link.R
+badd +16 dev/dev.Rmd
 argglobal
 %argdel
-edit R/entity_link.R
+edit dev/dev.Rmd
+let s:save_splitbelow = &splitbelow
+let s:save_splitright = &splitright
+set splitbelow splitright
+let &splitbelow = s:save_splitbelow
+let &splitright = s:save_splitright
 wincmd t
 let s:save_winminheight = &winminheight
 let s:save_winminwidth = &winminwidth
@@ -31,7 +35,7 @@ set winheight=1
 set winminwidth=0
 set winwidth=1
 argglobal
-balt ~/Documentos/Programação/R/sto/inst/stopwords/stopwords_pt.yml
+balt R/entity_link.R
 setlocal fdm=expr
 setlocal fde=v:lua.require'lazyvim.util'.ui.foldexpr()
 setlocal fmr={{{,}}}
@@ -40,11 +44,11 @@ setlocal fdl=99
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-let s:l = 60 - ((59 * winheight(0) + 58) / 117)
+let s:l = 16 - ((15 * winheight(0) + 35) / 70)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 60
+keepjumps 16
 normal! 0
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'

@@ -5,7 +5,7 @@
 \title{Generates a stopwords list of terms
 Function to generate a list of stopwords for a given language using grammar categories.}
 \usage{
-gen_stopwords(lang = "pt", categories = "IN CC CD", vec = "vec", add = NULL)
+gen_stopwords(lang = "pt", categories = "CC CD DT", vec = "vec", add = NULL)
 }
 \arguments{
 \item{lang}{language, like "en", "pt"}
@@ -22,8 +22,10 @@ Function to generate a list of stopwords for a given language using grammar cate
 \examples{
 gen_stopwords()
 gen_stopwords(lang = "pt")
-gen_stopwords(lang = "pt", categories = "V")
+gen_stopwords(lang = "pt", categories = "IN V")
 gen_stopwords(lang = "pt", categories = "V", vec = "list")
 gen_stopwords(lang = "pt", categories = "V", vec = "n_vec")
 gen_stopwords(lang = "pt", categories = "V", vec = "vec")
+Easily adding more stopwords:
+gen_stopwords(lang = "en", categories = "PP", add = "word1 word2")
 }

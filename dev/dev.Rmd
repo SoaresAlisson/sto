@@ -71,7 +71,64 @@ regex_NomeProprio <- "([[:Upper:]][[:Lower:]]+)*"
 
 extract_ppn("José da Silva e Fulano de Tal foram, bla Maria Silva.")
 ```
+```{r fun gen_stopwords}
+
+gen_stopwords <- function(lang = "pt", categories = "IN CC CD", vec = "vec", add = NULL) {
+  # lang = "PT"
+
+  # folder <- devtools::package_file("data/stopwords/")
+  # file.exists(folder)
+  file_name <- paste0("stopwords_", lang, ".yml") |> tolower()
+  # file_name2 <- paste0("/data/stopwords/", file_name)
+  # file_searched <- list.files(folder, pattern = file_name, full.names = T)
+  # file_searched <- devtools::package_file(paste0( "/data/stopwords/", file_name))
+  # file_searched <- devtools::package_file(paste0("/data/stopwords/", file_name))
+  yaml_file_path <- system.file("stopwords", file_name, package = "sto")
+
+  if (!yaml_file_path |> file.exists()) {
+    paste0(
+      'Error in "', lang,
+      '": language not found. Please specify a valid language'
+    ) |>
+      stop()
+  }
+
+  # system.file( package = "sto")
+  # # reading the yml filei
+  list_sw <- yaml_file_path |>
+    yaml::read_yaml() |>
+    ls2v()
+  # lapply(lapply(s2v)
+  # list_sw[7] |> lapply(s2v)
+
+  if (! is.null(add) ) list_sw[["added"]] <- s2v(add) #|> stringr::str_to_title()
+
+  categ_vec <- categories |>
+    toupper() |>
+    s2v()
+
+  categ_vec <- c(categ_vec, "included")
+
+  sw <- list_sw[categ_vec]
+
+  if (vec == "n_vec") {
+    sw <- unlist(sw)
+  } else if (vec == "vec") {
+    sw <- unlist(sw) |>
+      unname() |>
+      unique()
+  }
+
+  return(sw)
+
+  # message(folder)
+  # return(folder)
+  # print("ola")
+}
+
+```
 ```{r, gen_stopwords}
+sto::show_sw("pt")
 gen_stopwords(lang = "pt", categories = "V PP")
 ```
 

@@ -2,6 +2,7 @@
 #'
 #' @param lang language, like "en", "pt"
 #' @param add include additional words to the stop words list
+#' @param as_vector return as vector
 #' @return an list object of stopwords
 #' @export
 #'
@@ -40,6 +41,13 @@ show_sw <- function(lang, as_vector = FALSE, add = "") {
   return(sw)
 }
 
+#' check if vector or unit. If unit, break it into a vector
+add_words_check <- function(input) {
+  if (length(input) == 1) {
+    input <- s2v(input)
+  }
+    
+}
 
 
 #' Generates a stopwords list of terms
@@ -53,11 +61,13 @@ show_sw <- function(lang, as_vector = FALSE, add = "") {
 #' @examples
 #' gen_stopwords()
 #' gen_stopwords(lang = "pt")
-#' gen_stopwords(lang = "pt", categories = "V")
+#' gen_stopwords(lang = "pt", categories = "IN V")
 #' gen_stopwords(lang = "pt", categories = "V", vec = "list")
 #' gen_stopwords(lang = "pt", categories = "V", vec = "n_vec")
 #' gen_stopwords(lang = "pt", categories = "V", vec = "vec")
-gen_stopwords <- function(lang = "pt", categories = "IN CC CD", vec = "vec", add = NULL) {
+#' Easily adding more stopwords:
+#' gen_stopwords(lang = "en", categories = "PP", add = "word1 word2")
+gen_stopwords <- function(lang = "pt", categories = "CC CD DT", vec = "vec", add = NULL) {
   # lang = "PT"
 
   # folder <- devtools::package_file("data/stopwords/")
@@ -69,29 +79,42 @@ gen_stopwords <- function(lang = "pt", categories = "IN CC CD", vec = "vec", add
   # file_searched <- devtools::package_file(paste0("/data/stopwords/", file_name))
   yaml_file_path <- system.file("stopwords", file_name, package = "sto")
 
-  if (!yaml_file_path |> file.exists()) {
+  if (! file.exists(yaml_file_path )) {
     paste0(
       'Error in "', lang,
-      '": language not found. Please specify a valid language'
+      '": language not found. Please specify a valid language.'
     ) |>
       stop()
   }
 
-  # system.file( package = "sto")
-  # # reading the yml filei
+  # # reading the yml file
   list_sw <- yaml_file_path |>
     yaml::read_yaml() |>
     ls2v()
-  # lapply(lapply(s2v)
-  # list_sw[7] |> lapply(s2v)
 
-  list_sw[["added"]] <- s2v(add) #|> stringr::str_to_title()
+  if (length(add) == 1) add <- s2v(add)
+  # if (! is.null(add) ) list_sw[["added"]] <- add 
+  if (! is.null(add) ) list_sw[["added"]] <- s2v(add) #|> stringr::str_to_title()
 
   categ_vec <- categories |>
     toupper() |>
     s2v()
 
-  categ_vec <- c(categ_vec, "included")
+  # test if categories in parameters really exists
+  categ_vec_in_list_sw <- categ_vec %in% names(list_sw)
+
+  if (any(! categ_vec_in_list_sw )) {
+
+   cat_not_found <- categ_vec[!categ_vec_in_list_sw]
+
+    paste0(
+      'Error in "categories" parameter. "', cat_not_found ,'" no found. Please specify a valid category.'
+    ) |>
+      stop()
+  }
+
+  # apend categories of the user
+  categ_vec <- c(categ_vec, "added")
 
   sw <- list_sw[categ_vec]
 
@@ -101,13 +124,14 @@ gen_stopwords <- function(lang = "pt", categories = "IN CC CD", vec = "vec", add
     sw <- unlist(sw) |>
       unname() |>
       unique()
+  } else if ( vec == "list" ) {
+    sw <- sw
+  } else {
+    stop(paste("Parameter invalid: ", vec))
   }
 
   return(sw)
 
-  # message(folder)
-  # return(folder)
-  # print("ola")
 }
 
 #' to generate a dictionary of specialized words

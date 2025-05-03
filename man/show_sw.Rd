@@ -9,6 +9,8 @@ show_sw(lang, as_vector = FALSE, add = "")
 \arguments{
 \item{lang}{language, like "en", "pt"}
 
+\item{as_vector}{return as vector}
+
 \item{add}{include additional words to the stop words list}
 }
 \value{

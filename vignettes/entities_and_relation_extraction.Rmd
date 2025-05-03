@@ -107,7 +107,7 @@ text[1:2] # seeing the head of the text
 And now extracting the graphs:
 
 ```{r ex wikipedia plot GNU}
-g <- text |> extract_graph(sw = gen_stopwords("en", include = "The This It"))
+g <- text |> extract_graph(sw = gen_stopwords("en", add = "The This It"))
 g
 g_N <- g |> dplyr::count(n1, n2, sort = T)
 g_N
@@ -141,7 +141,7 @@ text <- page |>
   rvest::html_nodes("p") |>
   rvest::html_text()
 text[1:2] # seeing the head of the tex
-g <- text |> extract_graph(sw = gen_stopwords("en", include = "The This It"))
+g <- text |> extract_graph(sw = gen_stopwords("en", add = "The This It"))
 g_N <- g |> dplyr::count(n1, n2, sort = T)
 
 plot_graph(text, g_N, head_n = 50)

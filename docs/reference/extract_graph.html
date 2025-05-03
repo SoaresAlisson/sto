@@ -107,7 +107,15 @@ It extracts only if two entities are mentioned in the same token (sentence or pa
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">text</span> <span class="op">&lt;-</span> <span class="st">"John Does lives in New York in United States of America. He  is a passionate jazz musician, often playing in local clubs."</span></span></span>
 <span class="r-in"><span><span class="fu">extract_graph</span><span class="op">(</span><span class="va">text</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Tokenizing by sentences</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in strsplit(char, sep):</span> non-character argument</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 2</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   n1                       n2                      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> John Does                New York                </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> John Does                United States of America</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> John Does                He                      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> New York                 United States of America</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> New York                 He                      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> United States of America He                      </span>
 </code></pre></div>
     </div>
   </div>
