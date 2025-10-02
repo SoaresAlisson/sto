@@ -105,3 +105,28 @@ get_data <- function() {
   return(fresh_data)
 }
 ```
+
+TODO. Captar 
+- regex extract entities capturar Dra._Aaaaa_Aaa
+
+```{r antivax news read}
+Dir  <- "~/Documentos/Programação/R/meus_pacotes/busca_empregos/diario_oficial/dev/"
+files <- list.files(Dir)
+texto  <- readLines(paste0(Dir, files[1]))
+texto <- texto[1:308] |> 
+  tail(50) |>
+  trimws() |> stringi::stri_remove_empty()
+```
+```{r read html}
+texto <- paste0(Dir, files[2]) |> 
+  rvest::read_html() |> 
+  rvest::html_elements(".MsoNormal span") |> 
+  rvest::html_text() |> 
+  stringi::stri_remove_empty()
+```
+```{r extract}
+sto::show_sw("pt")
+my_sw <- sto::gen_stopwords("pt", cat = "IN CC CD DT PREP PP PPZ demonstrativo", add = "Já")
+texto |> paste(collapse = " ") |> extract_entity(sw = my_sw)
+```
+

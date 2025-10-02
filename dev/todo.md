@@ -1,0 +1,3 @@
+- load packages, but ask it not installed, install it.
+- regex extract entities capturar Dra._Aaaaa_Aaa. Ou seria em netWord?
+- gen_stopwords(cat = "all")

@@ -1,0 +1,29 @@
+TODO: category all
+```{r}
+check_sw_categories <- function(categories, lang) {
+  # lang = "pt"
+  
+  if (categories == "all"){
+      show_sw(lang) |> unlist() |> sort() |> unique()
+  } else {
+    categ_vec <- categories |>
+        toupper() |>
+        s2v()
+
+      # test if categories in parameters really exists
+      categ_vec_in_list_sw <- categ_vec %in% names(list_sw)
+
+      if (any(! categ_vec_in_list_sw )) {
+
+      cat_not_found <- categ_vec[!categ_vec_in_list_sw]
+
+        paste0( 'Error in "categories" parameter. "', 
+          cat_not_found ,'" no found. Please specify a valid category.'
+        ) |>
+          stop()
+      }
+  }
+}
+
+```
+

@@ -2,7 +2,8 @@
 % Please edit documentation in R/stopwords.R
 \name{gen_stopwords}
 \alias{gen_stopwords}
-\title{Generates a stopwords list of terms
+\title{check if vector or unit. If unit, break it into a vector
+Generates a stopwords list of terms
 Function to generate a list of stopwords for a given language using grammar categories.}
 \usage{
 gen_stopwords(lang = "pt", categories = "CC CD DT", vec = "vec", add = NULL)
@@ -16,6 +17,7 @@ gen_stopwords(lang = "pt", categories = "CC CD DT", vec = "vec", add = NULL)
 \item{include}{include additional words to the stop words list}
 }
 \description{
+check if vector or unit. If unit, break it into a vector
 Generates a stopwords list of terms
 Function to generate a list of stopwords for a given language using grammar categories.
 }

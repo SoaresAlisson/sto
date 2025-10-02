@@ -11,7 +11,7 @@
 #' show_sw("en")
 #' # as vector and adding some more stopwords
 #' show_sw("en", T, "Abul Zoe")
-show_sw <- function(lang, as_vector = FALSE, add = "") {
+show_sw <- function(lang = "en", as_vector = FALSE, add = "") {
   # lang = "pt"
   file_name <- paste0("stopwords_", lang, ".yml") |> tolower()
   yaml_file_path <- system.file("stopwords", file_name, package = "sto")
@@ -42,12 +42,12 @@ show_sw <- function(lang, as_vector = FALSE, add = "") {
 }
 
 #' check if vector or unit. If unit, break it into a vector
-add_words_check <- function(input) {
-  if (length(input) == 1) {
-    input <- s2v(input)
-  }
-    
-}
+# add_words_check <- function(input) {
+#   if (length(input) == 1) {
+#     input <- s2v(input)
+#   }
+#
+# }
 
 
 #' Generates a stopwords list of terms
@@ -107,13 +107,13 @@ gen_stopwords <- function(lang = "pt", categories = "CC CD DT", vec = "vec", add
 
    cat_not_found <- categ_vec[!categ_vec_in_list_sw]
 
-    paste0(
-      'Error in "categories" parameter. "', cat_not_found ,'" no found. Please specify a valid category.'
+    paste0( 'Error in "categories" parameter. "', 
+      cat_not_found ,'" no found. Please specify a valid category.'
     ) |>
       stop()
   }
 
-  # apend categories of the user
+  # append categories of the user
   categ_vec <- c(categ_vec, "added")
 
   sw <- list_sw[categ_vec]
@@ -129,9 +129,7 @@ gen_stopwords <- function(lang = "pt", categories = "CC CD DT", vec = "vec", add
   } else {
     stop(paste("Parameter invalid: ", vec))
   }
-
   return(sw)
-
 }
 
 #' to generate a dictionary of specialized words

@@ -29,7 +29,7 @@ It comes with three main types of functions:
 ## Installing String Operations
 Install using {devtools} package
 
-```{r eval=FALSE}
+```{r ,eval=FALSE}
 # Check if devtools is not installed yet. If not, install it.
 if (!require('devtools')) install.packages('devtools')
 # then, install sto package

@@ -4,7 +4,7 @@
 \alias{show_sw}
 \title{show all stopwords categories of a language}
 \usage{
-show_sw(lang, as_vector = FALSE, add = "")
+show_sw(lang = "en", as_vector = FALSE, add = "")
 }
 \arguments{
 \item{lang}{language, like "en", "pt"}
