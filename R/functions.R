@@ -135,6 +135,24 @@ ls2v <- function(char, sep = " |\\n|\\t|\\r", wss = "_") {
 #|>
 # }
 
+#' check if is installed, load / install & load
+#' @noRd
+check_if_installed <- function(pack, ...) {
+  # pack = "dplyr"
+  # pack = "xyx"
+  pacote_existe <- system.file(package = pack) != ""
+
+  if (pacote_existe) {
+    message("== loading: ", pack)
+    library(pack, character.only = TRUE)
+  } else {
+    message('The package "', pack, '" is not installed yet. Install? (Y,n)')
+
+    message("== installing: ", pack)
+    install.packages(pack, dependencies = TRUE)
+    library(pack, character.only = TRUE)
+  }
+}
 
 #' load libraries from string
 #'
@@ -144,29 +162,33 @@ ls2v <- function(char, sep = " |\\n|\\t|\\r", wss = "_") {
 #' @param print if TRUE, will return a string that can be pasted in the console
 #' @param ... additional parameters
 #' @export
-#' 
+#'
 #' @examples
 #' sto::ll("rvest stringr dplyr")
 #' sto::ll("rvest stringr dplyr", print=TRUE)
-ll <- function(char, print=FALSE, ...) {
+ll <- function(char, print = FALSE, ...) {
   # char <- "rvest stringr dplyr"
-if (print == FALSE) {
-  gsub(",|;", " ", char) |>
-    s2v() |>
-    stringi::stri_remove_empty() |>
-    lapply(library, character.only = TRUE, ...)
-  } else if (print == TRUE){
-  
-    packages <- gsub(",|;", " ", char) |>
+  packages <- gsub(",|;", " ", char) |>
     s2v() |>
     stringi::stri_remove_empty()
 
-sapply(packages, \(lib) f("library({lib})"))  |>
+  if (print == FALSE) {
+    # packages |> lapply(check_if_installed, character.only = TRUE, ...)
+    for (p in packages) {
+      check_if_installed(p, character.only = TRUE, ...)
+    }
+  } else if (print == TRUE) {
+    # for (lib in packages) {f("library({lib})")) } |>
+    sapply(packages, \(lib) {
+      f("library({lib})")
+    }) |>
       paste(collapse = "\n") |>
-      unlist() |> unique() |> 
+      unlist() |>
+      unique() |>
       cat()
-  } 
+  }
 }
+
 
 #' Install libraries from string.
 #'
@@ -254,30 +276,30 @@ s_extract_all <- function(txt, pattern, IC = TRUE, unl = FALSE) {
 #' grep2("[[:alpha:]]") |> # select all letters
 #' # grep2("[[:digit:]]")  |> # select all numbers
 #' nothing()
-#' 
-#' # Changing the commented lines: 
+#'
+#' # Changing the commented lines:
 #' s2v("a b c d 1 2 3 4") |>
 #' # grep2("[[:alpha:]]") |> # select all letters
 #' grep2("[[:digit:]]")  |> # select all numbers
 #' nothing()
 nothing <- function(input) {
-  return(input) 
+  return(input)
 }
 
 #` TODO
-#' funcao para apagar o vetor de texto a partir do início de certo padrão de txt 
+#' funcao para apagar o vetor de texto a partir do início de certo padrão de txt
 #' @param to_end If TRUE, erases from criteria to the end of text. if FALSE, erases from the begin to the criteria
-strip_txt <- function(txt, criteria, to_end = TRUE) { 
+strip_txt <- function(txt, criteria, to_end = TRUE) {
   txt2 <- unlist(txt)
   index <- txt2 |> unlist() |> grepl2(criteria) |> which()
 
-  if(length(index)==0){
+  if (length(index) == 0) {
     NA
-  } else{
-      if(to_end == T){
-        txt2[1:index-1] # retorna do inicio do txt até padrão
-    } else{
+  } else {
+    if (to_end == T) {
+      txt2[1:index - 1] # retorna do inicio do txt até padrão
+    } else {
       txt2[index:length(txt2)] # retorna do padrão ao fim
-  }
+    }
   }
 }

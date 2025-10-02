@@ -15,7 +15,7 @@ grep2("[[:alpha:]]") |> # select all letters
 # grep2("[[:digit:]]")  |> # select all numbers
 nothing()
 
-# Changing the commented lines: 
+# Changing the commented lines:
 s2v("a b c d 1 2 3 4") |>
 # grep2("[[:alpha:]]") |> # select all letters
 grep2("[[:digit:]]")  |> # select all numbers
