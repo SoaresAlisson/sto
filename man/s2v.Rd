@@ -4,14 +4,24 @@
 \alias{s2v}
 \title{Convert a string into a vector of elements.}
 \usage{
-s2v(char, sep = " |\\\\n|\\\\t|\\\\r", wss = "_", print = FALSE)
+s2v(
+  char,
+  sep = " |\\\\n|\\\\t|\\\\r|,|;",
+  wss = "_",
+  keep_wss = FALSE,
+  print = FALSE
+)
 }
 \arguments{
 \item{char}{character to be transformed}
 
-\item{sep}{separator}
+\item{sep}{separator. It can be a regular expression pattern.}
 
-\item{wss}{whitespace substitution. Which character will be used in the end to be converted into white space}
+\item{wss}{whitespace substitution. Which character will be used in 
+the end to be converted into white space}
+
+\item{keep_wss}{keep separator. If TRUE, will keep the separator, 
+if FALSE (default), it will be replaced by white space.}
 
 \item{print}{if TRUE, will return a string that can be pasted in the console}
 }
