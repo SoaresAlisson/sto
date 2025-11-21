@@ -3,4 +3,7 @@
 - gen_stopwords(cat = "all")
 - gsub(x=_,"\u00A0", " ",  fixed = TRUE) / whitespace
 - ~s2v keep _ parameter~
-- add _in text for compounded word vector, like New_York, Soviet_Union
+- ~add _in text for compounded word vector, like New_York, Soviet_Union~
+- delete functions extract_ppn that are in networds
+- sto:ll unload if already loaded and then load again
+- s2df(string, header=T)? ''

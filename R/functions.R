@@ -163,6 +163,23 @@ check_if_installed <- function(pack, ...) {
   }
 }
 
+#' check if the package is loaded.
+#' @noRd 
+#' @examples
+#' check_if_loaded(c("dplyr", "purrr", "sto"))
+check_if_loaded <- function(libs) {
+  # libs_loaded <- sessionInfo() |> gsub2("_\\d.*")
+  # libs[libs %in% libs_loaded]
+  libs_loaded <- tibble::tibble(libs = libs, 
+    loaded = R.utils::isPackageLoaded(libs)) |> 
+    dplyr::filter(loaded) |> dplyr::pull(libs)
+  # message("Unloading package: ", libs_loaded)
+  libs_loaded |> lapply(unloadNamespace)
+  message("Reloading packages: ", libs)
+  libs |> lapply(library, character.only = TRUE)
+}
+
+
 #' load libraries from string
 #'
 #' @description
@@ -181,6 +198,7 @@ ll <- function(char, print = FALSE, ...) {
     s2v() |>
     stringi::stri_remove_empty()
 
+    # check_if_loaded(packages)
   if (print == FALSE) {
     # packages |> lapply(check_if_installed, character.only = TRUE, ...)
     for (p in packages) {
