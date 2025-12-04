@@ -73,10 +73,10 @@ grepl2 <- function(x, arg1, ic = TRUE, ...) {
 #' Easily transform a character string into a vector of elements.
 #' @param char character to be transformed
 #' @param sep separator. It can be a regular expression pattern.
-#' @param wss whitespace substitution. Which character will be used in 
+#' @param wss whitespace substitution. Which character will be used in
 #' the end to be converted into white space
-#' @param keep_wss keep separator. If TRUE, will keep the separator, 
-#' if FALSE (default), it will be replaced by white space. 
+#' @param keep_wss keep separator. If TRUE, will keep the separator,
+#' if FALSE (default), it will be replaced by white space.
 #' @param print if TRUE, will return a string that can be pasted in the console
 #'
 #' @export
@@ -90,21 +90,27 @@ grepl2 <- function(x, arg1, ic = TRUE, ...) {
 #' "a|b|c|d e" |> s2v(sep = "\\|")
 #' # To use the output verbatim as a string to copy and use in the code
 #' "a b c d" |> s2v(print = TRUE)
-s2v <- function(char, sep = " |\\n|\\t|\\r|,|;",
-                wss = "_", 
-                keep_wss = FALSE,
-                print = FALSE) {
+s2v <- function(
+  char,
+  sep = " |\\n|\\t|\\r|,|;",
+  wss = "_",
+  keep_wss = FALSE,
+  print = FALSE
+) {
   vec <- char |>
     strsplit(sep) |>
     unlist() |>
     gsub2(" +", " ") |> # strip extra white spaces
-    gsub2("[,;]", " ") |> # strip comma
+    # gsub2("[,;]", " ") |> # strip comma
     stringi::stri_remove_empty() |>
-    gsub2("^ | $", "")  # strip extra white spaces
+    # strip extra white spaces
+    trimws(which = "both") # |>
+  # gsub2("^ | $", "")
 
-  if (!keep_wss){
+  if (!keep_wss) {
     vec <- vec |>
-      gsub2(wss, " ") }
+      gsub2(wss, " ")
+  }
 
   if (!print) {
     return(vec)
@@ -164,15 +170,18 @@ check_if_installed <- function(pack, ...) {
 }
 
 #' check if the package is loaded.
-#' @noRd 
+#' @noRd
 #' @examples
 #' check_if_loaded(c("dplyr", "purrr", "sto"))
 check_if_loaded <- function(libs) {
   # libs_loaded <- sessionInfo() |> gsub2("_\\d.*")
   # libs[libs %in% libs_loaded]
-  libs_loaded <- tibble::tibble(libs = libs, 
-    loaded = R.utils::isPackageLoaded(libs)) |> 
-    dplyr::filter(loaded) |> dplyr::pull(libs)
+  libs_loaded <- tibble::tibble(
+    libs = libs,
+    loaded = R.utils::isPackageLoaded(libs)
+  ) |>
+    dplyr::filter(loaded) |>
+    dplyr::pull(libs)
   # message("Unloading package: ", libs_loaded)
   libs_loaded |> lapply(unloadNamespace)
   message("Reloading packages: ", libs)
@@ -198,7 +207,7 @@ ll <- function(char, print = FALSE, ...) {
     s2v() |>
     stringi::stri_remove_empty()
 
-    # check_if_loaded(packages)
+  # check_if_loaded(packages)
   if (print == FALSE) {
     # packages |> lapply(check_if_installed, character.only = TRUE, ...)
     for (p in packages) {
