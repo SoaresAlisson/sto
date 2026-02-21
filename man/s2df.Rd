@@ -9,15 +9,22 @@ s2df(input_string, header = TRUE, sep = ";")
 \arguments{
 \item{input_string}{A character string in the format "col1;col2\nvalue1;value2".
 The first line should be the header row.}
+
+\item{header}{if the fist line must be considered the header or not. Default TRUE}
+
+\item{sep}{the separator of values. Default `;`.}
 }
 \value{
 A `tibble` with columns named according to the header and rows populated with data from the subsequent lines.
 }
 \description{
-Convert a string in CSV like format into a dataframe/tibble
+There is many ways to create a dataframe/tibble, one of them is tibble::tribble,
+but you must delimit strings between quotes, each item, each cell,  what can be
+very annoyng. With s2df, in the other hand, is possible to create a tibble of
+strings much more easier. It can be used, for example, in a pipe to replace
+many items in a text.
 }
 \examples{
-#'
 s <- "col1;col2
 bla1;10
 bla2;23
@@ -25,6 +32,16 @@ bla3;32
 "
 s2df(s)
 
+# example without column name specified
 s2 <- "bla1,10\nbla2,23\nbla3,32"
 s2df(s2, header = FALSE, sep = ",")
+
+# example of text substitution
+substitutions <- s2df("replace_this;by\nNew York;NewYork\nSoviet.Union;SovietUnion")
+substitutions
+text <- "Ice-cream in Soviet Union or New York?"
+stringr::str_replace_all(text, tibble::deframe(substitutions))
+# or use the function
+subs_synonyms(text, substitutions)
+
 }

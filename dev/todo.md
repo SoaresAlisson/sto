@@ -1,9 +1,11 @@
 - load packages, but ask it not installed, install it?
 - regex extract entities capturar Dra._Aaaaa_Aaa. Ou seria em netWord?
-- gen_stopwords(cat = "all")
 - gsub(x=_,"\u00A0", " ",  fixed = TRUE) / whitespace
+- ~gen_stopwords(cat = "all")~
 - ~s2v keep _ parameter~
 - ~add _in text for compounded word vector, like New_York, Soviet_Union~
-- delete functions extract_ppn that are in networds
+- ~delete functions extract_ppn that are in networds~
 - sto:ll unload if already loaded and then load again
-- s2df(string, header=T)? ''
+- ~s2df(string, header=T)?~
+- tests for subs_synonyms() and read_yml_dict()
+- subs_synonyms, accept also DF as input

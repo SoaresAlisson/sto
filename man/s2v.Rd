@@ -17,10 +17,10 @@ s2v(
 
 \item{sep}{separator. It can be a regular expression pattern.}
 
-\item{wss}{whitespace substitution. Which character will be used in 
+\item{wss}{whitespace substitution. Which character will be used in
 the end to be converted into white space}
 
-\item{keep_wss}{keep separator. If TRUE, will keep the separator, 
+\item{keep_wss}{keep separator. If TRUE, will keep the separator,
 if FALSE (default), it will be replaced by white space.}
 
 \item{print}{if TRUE, will return a string that can be pasted in the console}
