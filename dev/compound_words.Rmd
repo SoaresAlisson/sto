@@ -1,0 +1,35 @@
+Compound words are formed by combining two or more words to create a new word with a distinct meaning, such as "toothbrush" or "snowman." They can be categorized into three types: open (with spaces, like "ice cream"), closed (without spaces, like "notebook"), and hyphenated (with hyphens, like "mother-in-law").
+
+replace in text
+
+
+```{r }
+txt <- "Was ice-cream better in Soviet Union or in New York?"
+s <- "Soviet_Union New_York"
+s2 <- "Soviet_Union New_York ice.cream"
+
+df_sub <- tibble::tibble(c1 = s2v(s), c2 = s2v(s, keep_wss = T))
+txt2 <- txt |> stringr::str_replace_all(tibble::deframe(df_sub))
+
+txt2 |> tokenizers::tokenize_words()
+```
+```{r fun}
+compounded_words <- function(txt, subs) {
+  # if (nchar(subs) == 0) {
+  if (subs == "") {
+    stop("subs parameter is empty")
+  }
+  df_sub <- tibble::tibble(
+    c1 = s2v(subs),
+    c2 = s2v(subs, keep_wss = T)
+  )
+
+  txt |>
+    stringr::str_replace_all(tibble::deframe(df_sub))
+}
+
+compound_words(txt, s)
+compound_words(txt, s) |> tokenizers::tokenize_words(strip_punct = F)
+compound_words("The Iran-Contra Scandal was a big thing in Reagens administration", "") |>
+  tokenizers::tokenize_words()
+```
