@@ -32,11 +32,13 @@
 #' substitutions <- s2df("replace_this;by\nNew York;NewYork\nSoviet.Union;SovietUnion")
 #' substitutions
 #' text <- "Ice-cream in Soviet Union or New York?"
-#' stringr::str_replace_all(text,  tibble::deframe(substitutions))
+#' stringr::str_replace_all(text, tibble::deframe(substitutions))
+#' # or use the function
+#' subs_synonyms(text, substitutions)
 #'
 s2df <- function(input_string, header = TRUE, sep = ";") {
   # if input_string is empty
-  if (length(input_string) <= 1) {
+  if (nchar(input_string) <= 1) {
     stop("The input provided is empty")
   }
 

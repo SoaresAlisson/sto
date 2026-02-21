@@ -1,4 +1,7 @@
+# all moved to netwods package?
+
 rgx_abbrev <- "([:upper:]\\.){2,}"
+
 # rgx_word <- "(\\b[A-ZÀ-Ÿ][[A-ZÀ-Ÿ][a-zà-ÿ]\\.\\-]+\\b)"
 # rgx_word <- "(\\b[A-ZÀ-Ÿ][A-ZÀ-Ÿa-zà-ÿ0-9\\.\\-]+\\b)"
 # unicode in order https://symbl.cc/en/unicode-table/#spacing-modifier-letters

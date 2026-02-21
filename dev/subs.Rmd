@@ -1,0 +1,67 @@
+Substitution from yml 
+"key: word1 word2"
+
+```{r }
+dic_subs <- "
+# comment
+WEF: World_Economic_Forum W\\.E\\.F\\.
+NWO: New_World_Order N\\.W\\.O\\.
+"
+
+```
+```{r fun}
+#' read the yml as pure text and transform it into named list
+read_yml_dict <- function(txt){
+  # transfoming yml txt into list
+  list_ <- txt |> 
+    strsplit("[\n\t\r]") |>
+    unlist() |>
+    grep2("^#", invert = T) |>
+    stringi::stri_remove_empty() |> 
+    lapply( s2v)
+  list_names <- lapply(list_, function(x) x[1]) |> unlist() |> gsub2(":.*")
+  names(list_) <- list_names
+  list_ <- lapply(list_, function(x) x[-1]) #|> unlist() |> gsub2(":.*")
+  return(list_)
+}
+
+read_yml_dict(dic_subs)
+```
+```{r fun}
+#' substitute words in text by other "synonyms" from a yaml like
+get_pairs <- function(substitutions) {
+  # Initialize an empty list to store the pairs
+  pairs_list <- list()
+  
+  # Loop through each element in the substitution list
+  for (key in names(substitutions)) {
+    # Get the vector elements and create a pair with the key
+    pairs_list[[key]] <- data.frame(Name = key, Elements = substitutions[[key]])
+  }
+  
+dplyr::bind_rows(pairs_list)
+}
+get_pairs(subst)
+```
+```{r fun synonym}
+subs_synonyms <- function(txt, subst, lower = FALSE){
+  pairs_list <- list()
+
+  for (key in names(subst)) {
+    # Get the vector elements and create a pair with the key
+    pairs_list[[key]] <- data.frame(
+      Elements = subst[[key]],
+      Name = key
+    )
+  }
+  subs_ <- dplyr::bind_rows(pairs_list) |> tibble::deframe()
+  stringr::str_replace_all(txt, subs_)
+  }
+}
+
+txt <- "The World Economic Forum announced that X and Y. The W.E.F. is a lorem ipsum"
+subst <- read_yml_dict(dic_subs)
+subs_synonyms(txt, subst)
+```
+
+
