@@ -1,0 +1,47 @@
+
+```{r }
+st <- c(s2v("a b c d"), "", s2v("e f g h"), "")
+
+Filter(""), st)
+Filter(Negate(is.null), st)
+rows <- Filter(Negate(is.null), rows)
+```
+```{r }
+library(tidyverse)
+input_string <- s
+# Define the function
+# parse_string_to_tibble <- function(input_string) {
+s2df <- function(input_string) {
+  # Split the input string by new lines to get individual rows
+  rows <- strsplit(input_string, "\n")[[1]]
+
+  # Remove empty rows if any
+  rows <- Filter(Negate(is.null), rows)
+
+  # Extract headers and data
+  header <- unlist(strsplit(rows[1], ";"))
+  data_lines <- rows[-1]
+
+  # Split each data line into columns and create a matrix
+  data_matrix <- do.call(rbind, lapply(data_lines, function(line) {
+    unlist(strsplit(line, ";"))
+  }))
+
+  # Convert the matrix to a tibble
+  result_tibble <- as_tibble(data_matrix)
+
+  # Set the column names
+  colnames(result_tibble) <- header
+
+  return(result_tibble)
+}
+
+# Example usage
+s <- "col1;col2
+bla1;10
+bla2;23
+bla3;32
+"
+s2df(s)
+parse_string_to_tibble(s)
+```

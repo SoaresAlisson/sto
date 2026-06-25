@@ -9,3 +9,4 @@
 - ~s2df(string, header=T)?~
 - tests for subs_synonyms() and read_yml_dict()
 - subs_synonyms, accept also DF as input
+- rgx: email, url "https?://[\\w.-]+|www\\.[\\w.-]+"
