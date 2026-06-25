@@ -32,6 +32,24 @@ bla3;32
 "
 s2df(s)
 
+# example with spaces. when a lot of spaces, use regex " +"
+DF <- sto::s2df(
+  "col1 col2 col3
+10   weekday      office
+34   weekday      office
+58   weekday      office
+82   weekend        home
+106  weekend        home
+130  weekday      campus
+154  weekday        home
+178  weekday appointment
+202  weekday      office
+226  weekday      office
+250  weekend        home
+274  weekend        home",
+  sep = " +"
+)
+
 # example without column name specified
 s2 <- "bla1,10\nbla2,23\nbla3,32"
 s2df(s2, header = FALSE, sep = ",")
